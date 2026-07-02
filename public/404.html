@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>OpenEd Redirector</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages SPA Routing
+      // MIT License - https://github.com/rafgraph/spa-github-pages
+      var pathSegmentsToKeep = 0; // Set to 1 if deploying to a project page e.g. username.github.io/repo-name/
+
+      var l = window.location;
+      var pathArray = l.pathname.split('/');
+      if (pathArray.length > 2 && pathArray[1] !== "") {
+        if (!l.hostname.endsWith('.github.io') || l.hostname.split('.').length > 3) {
+          pathSegmentsToKeep = 0;
+        } else {
+          pathSegmentsToKeep = 1;
+        }
+      }
+
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') +
+        '/?p=' + l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+    Redirecting to OpenEd App...
+  </body>
+</html>

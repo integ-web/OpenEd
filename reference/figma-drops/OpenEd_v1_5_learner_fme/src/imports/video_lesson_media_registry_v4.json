@@ -1,0 +1,1625 @@
+{
+  "version": "v4-split-video-bundle",
+  "courseOwnedVideosExist": false,
+  "policy": "External videos are reference media only. The authored course script is the reliable teaching layer.",
+  "currentDuplicateUrlsDetectedInUploadedPrototype": [
+    {
+      "url": "https://www.youtube.com/watch?v=fLoYcXLG6ro",
+      "count": 3
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=k1t2xyWMUdY",
+      "count": 4
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Ep7uaxwN-mQ",
+      "count": 5
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=agEPmYdbQLs",
+      "count": 4
+    }
+  ],
+  "lessons": [
+    {
+      "lessonId": "P1.L1",
+      "phaseId": "P1",
+      "phaseTitle": "The Paradigm",
+      "lessonTitle": "What Is Frontier Model Evaluation?",
+      "duration": "45 min",
+      "learningObjective": "Explain frontier model evaluation as systematic measurement of model behavior under defined conditions.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Yann Dubois: Scalable Evaluation of Large Language Models",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=ZaQYM-YF1rM",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Best-fit reference for scalable LLM evaluation and why evals require methodology, not vibes."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P1.L2",
+      "phaseId": "P1",
+      "phaseTitle": "The Paradigm",
+      "lessonTitle": "Model Types and Capability Surfaces",
+      "duration": "60 min",
+      "learningObjective": "Distinguish base, instruction-tuned, RLHF, code, multimodal, agentic, and frontier models by evaluation implications.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Andrej Karpathy: Intro to Large Language Models",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Useful model-background reference for learners who need a concrete explanation of LLM types and capability surfaces."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P1.L3",
+      "phaseId": "P1",
+      "phaseTitle": "The Paradigm",
+      "lessonTitle": "Benchmark, Dataset, Task, Metric, Prompt",
+      "duration": "60 min",
+      "learningObjective": "Use core evaluation vocabulary precisely and identify how each term affects validity.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Stanford CS224N Lecture 11 \u2014 Benchmarking by Yann Dubois",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=TO0CqzqiArM",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Directly supports benchmark, dataset, task, metric, prompt, and evaluation vocabulary."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P1.L4",
+      "phaseId": "P1",
+      "phaseTitle": "The Paradigm",
+      "lessonTitle": "Outcome Metrics vs Trajectory Metrics",
+      "duration": "45 min",
+      "learningObjective": "Explain when final-answer scores are insufficient and trajectory metrics are needed.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Evaluation for Large Language Models and Generative AI \u2014 Deep Dive",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=iQl03pQlYWY",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Useful overview of LLM evaluation methods and the limits of single outcome scores."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P1.L5",
+      "phaseId": "P1",
+      "phaseTitle": "The Paradigm",
+      "lessonTitle": "Benchmarks, Saturation, and Goodhart\u2019s Law",
+      "duration": "75 min",
+      "learningObjective": "Identify benchmark saturation, Goodhart effects, contamination, and proxy mistakes in frontier evaluation claims.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Fran\u00e7ois Chollet: How We Get To AGI",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=5QcCeSsNRks",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Provides benchmark and generalization context for saturation, ARC-style thinking, and Goodhart-resistant evaluation."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P1.L6",
+      "phaseId": "P1",
+      "phaseTitle": "The Paradigm",
+      "lessonTitle": "From Vague Risk to Evaluation Objective",
+      "duration": "75 min",
+      "learningObjective": "Convert a vague AI safety concern into a measurable evaluation objective.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "BlueDot AI Governance Resource \u2014 Model Evaluation for Extreme Risks",
+        "provider": "BlueDot / external course resource",
+        "url": "https://bluedot.org/courses/governance-2023/4",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Reference for moving from risk claims to evaluation objectives in extreme-risk governance contexts."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P2.L1",
+      "phaseId": "P2",
+      "phaseTitle": "Harness Engineering",
+      "lessonTitle": "Evaluation Harness Anatomy",
+      "duration": "60 min",
+      "learningObjective": "Describe the components of a working evaluation harness and how each can fail.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Evaluate LLMs with Language Model Evaluation Harness",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=p-gzfS1JgEE",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Practical walkthrough for understanding harness mechanics."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P2.L2",
+      "phaseId": "P2",
+      "phaseTitle": "Harness Engineering",
+      "lessonTitle": "Golden Datasets and Edge-Case Sampling",
+      "duration": "75 min",
+      "learningObjective": "Design a curated golden dataset with labels, rationales, edge cases, and documentation.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Using Promptfoo + CSVs to Eval Models",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=pcFKF2CpVvo",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Concrete dataset-driven eval example with CSV test cases."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P2.L3",
+      "phaseId": "P2",
+      "phaseTitle": "Harness Engineering",
+      "lessonTitle": "LLM-as-Judge Without Self-Deception",
+      "duration": "90 min",
+      "learningObjective": "Design judge prompts, rubrics, calibration sets, and bias checks for model-graded evaluation.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "LLM as a Judge: Scaling AI Evaluation Strategies",
+        "provider": "YouTube / IBM Technology",
+        "url": "https://www.youtube.com/watch?v=trfUBIDeI1Y",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Lesson-aligned external reference for judge-based evaluation."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P2.L4",
+      "phaseId": "P2",
+      "phaseTitle": "Harness Engineering",
+      "lessonTitle": "RAG Triad and Retrieval-Aware Evaluation",
+      "duration": "75 min",
+      "learningObjective": "Evaluate answer relevance, context relevance, retrieval precision/recall, and faithfulness in RAG systems.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Turbocharge Your RAG Applications with Powerful RAG Analytics",
+        "provider": "YouTube / DeepLearning.AI",
+        "url": "https://www.youtube.com/watch?v=njN_Wu8dLfE",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "RAG evaluation reference for retrieval, generation, and attribution quality."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P2.L5",
+      "phaseId": "P2",
+      "phaseTitle": "Harness Engineering",
+      "lessonTitle": "Tooling Lab: promptfoo, DeepEval, and Inspect AI",
+      "duration": "120 min",
+      "learningObjective": "Implement the same safe evaluation in at least two frameworks and compare output quality.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Start with Promptfoo in under 10 min.",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7Z6_7XkXwj0",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Fast practical setup reference for promptfoo-based evals."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P2.L6",
+      "phaseId": "P2",
+      "phaseTitle": "Harness Engineering",
+      "lessonTitle": "Phase Studio: Automated Native Testing Harness",
+      "duration": "60 min",
+      "learningObjective": "Assemble a lightweight local evaluation harness with dataset, scorer, logs, validation script, and report.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "LLM Evals In Practice: Creating Custom Task Evals",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=WWwYCAIYzQk",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Supports the phase studio task of building custom native evals."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L1",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "Why Agent Evaluation Is Different",
+      "duration": "75 min",
+      "learningObjective": "Explain why agents require environment, state, tool, and trajectory evaluation.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "How to Build, Evaluate, and Iterate on LLM Agents",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0pnEUAwoDP0",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Broad introduction to agent evaluation and iteration loops."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L2",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "Tool Calls, State, and Trajectory Logging",
+      "duration": "105 min",
+      "learningObjective": "Design a trace schema for multi-turn agent evaluations.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Agent Evaluation #langchain",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=-URxC6zXnNs",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Reference for evaluating agent steps and tool use."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L3",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "SWE-bench and Coding Agent Evaluation",
+      "duration": "105 min",
+      "learningObjective": "Interpret execution-based software engineering benchmarks and their caveats.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "John Yang \u2014 SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=DrLdvbkgmeA",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Directly aligned with SWE-bench and coding agent evaluation."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L4",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "OSWorld, WebArena, and GAIA",
+      "duration": "105 min",
+      "learningObjective": "Compare environment-based agent benchmarks and choose which fits a task claim.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "The State of Web Agents",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=VRRi_KRbfps",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Covers WebArena, VisualWebArena, WorkArena, and the benchmark landscape for web agents."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L5",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "Sandboxes and Low-Compute Agent Execution",
+      "duration": "120 min",
+      "learningObjective": "Design a safe, lightweight sandbox for de-risked agent tasks.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Software Control Models: Building Agents for Real-World Interfaces",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=BxfiW3wi640",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Supports desktop-agent and low-compute sandbox design."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L6",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "Long Task Horizons, Autonomy, and ARA",
+      "duration": "105 min",
+      "learningObjective": "Explain long-task time horizons and autonomous replication/adaptation as evaluation frames.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "METR: Measuring AI Ability to Complete Long Tasks",
+        "provider": "METR article / external media alternative",
+        "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Direct reference for long-horizon autonomy and task-completion framing."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P3.L7",
+      "phaseId": "P3",
+      "phaseTitle": "Autonomous Agents",
+      "lessonTitle": "Phase Studio: Agent Execution Sandbox",
+      "duration": "105 min",
+      "learningObjective": "Assemble the phase deliverable: a safe agent execution sandbox with trace logging and validation.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Evaluating CrewAI + MCP with Promptfoo",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=o7CKEeyth1Q",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Practical reference for agent/MCP evaluation and phase-studio implementation."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L1",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "Spatial Reasoning and World Models",
+      "duration": "60 min",
+      "learningObjective": "Define spatial/world-model evaluation and explain why text-only metrics are insufficient.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "ARC-AGI-2 Overview With Fran\u00e7ois Chollet",
+        "provider": "YouTube / ARC Prize",
+        "url": "https://www.youtube.com/watch?v=TWHezX43I-4",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Relevant to spatial/world-model generalization and ARC-style task design."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L2",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "Object Permanence, Physical Consistency, and Temporal Coherence",
+      "duration": "75 min",
+      "learningObjective": "Design tests for object permanence, physics plausibility, and temporal consistency.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "RLBench: The Robot Learning Benchmark",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=F2PqREHT3F8",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Direct reference for physical simulation benchmark thinking."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L3",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "ARC-AGI-2 and Abstract Generalization",
+      "duration": "75 min",
+      "learningObjective": "Explain how ARC-style tasks test abstraction and sample-efficient generalization.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "ARC Prize Version 2 Launch Video",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=M3b59lZYBW8",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Supports ARC-AGI-2 and benchmark refresh discussion."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L4",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "Multimodal Benchmark Design",
+      "duration": "75 min",
+      "learningObjective": "Design multimodal tasks that combine visual, textual, and structured evidence.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "MM-SafetyBench: A Benchmark for Safety Evaluation of Multimodal Large Language Models",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1j2Jz6oJ4Uo",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Directly related to multimodal safety benchmark design."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L5",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "Simulation Benchmarks: RLBench, VIMA, and Factory Layouts",
+      "duration": "105 min",
+      "learningObjective": "Use simulation benchmarks to design safe physical reasoning tasks.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "RLBench 2019 \u2014 Comparing Robot Learning Algorithms on 100 Tasks",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=blt0l8cQqZo",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Extends physical benchmark design with multi-task simulation context."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L6",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "Video and Interactive World-Model Evaluation",
+      "duration": "75 min",
+      "learningObjective": "Evaluate video/world-model claims using consistency, controllability, and interaction tests.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Stanford CME295 Transformers & LLMs \u2014 Quantifying LLM Performance",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=8fNP4N46RRo",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Useful performance-quantification reference for multimodal/video-world model lessons."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P4.L7",
+      "phaseId": "P4",
+      "phaseTitle": "Spatial and World Models",
+      "lessonTitle": "Phase Studio: Physical Simulation Benchmark",
+      "duration": "75 min",
+      "learningObjective": "Assemble a de-risked physical simulation benchmark and reporting rubric.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "RLBench Task Building Tutorial \u2014 Target Reaching Part 1",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=bKaK_9O3v7Y",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Hands-on reference for building physical simulation tasks."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L1",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Red Teaming as Evaluation",
+      "duration": "60 min",
+      "learningObjective": "Explain red teaming as systematic adversarial evaluation, not chaos or provocation.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Ethan Perez \u2014 Inverse Scaling, Red Teaming",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=TjWiaUMMh6g",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Research-oriented reference for red teaming language models."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L2",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Multi-turn Prompt Injection and Tool Attack Evaluation",
+      "duration": "75 min",
+      "learningObjective": "Design safe evaluations for prompt injection in tool-using systems.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Prompt Engineering and AI Red Teaming \u2014 Sander Schulhoff",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=_BRhRh7mOX0",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Direct fit for prompt injection origins and AI red teaming concepts."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L3",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Dangerous Capability Domains Safely",
+      "duration": "90 min",
+      "learningObjective": "Explain frontier risk domains and how to discuss them without operationalizing harm.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Red Teaming of LLM Applications: Going from Prototype to Production",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=yalj9BbWqoI",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Application-level red-team reference with production framing."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L4",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Cyber and Bio Uplift Evaluation Design",
+      "duration": "90 min",
+      "learningObjective": "Design de-risked uplift evaluations for cyber and bio/chemical risk without harmful instructions.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Anthropic Research \u2014 Constitutional Classifiers",
+        "provider": "Anthropic research page with embedded media",
+        "url": "https://www.anthropic.com/research/constitutional-classifiers",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Safe external reference for jailbreak defense and capability-threshold mitigation framing."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L5",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Persuasion, Deception, Sandbagging, and Scheming",
+      "duration": "75 min",
+      "learningObjective": "Define behavioral risk signals and design safe evaluation probes for strategic or deceptive behavior.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Ethan Perez \u2014 Discovering Language Model Behaviors with Model-Written Evaluations",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=jslSqapaBbI",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Reference for model-written evaluations, deception/sandbagging-adjacent evaluation methods."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L6",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Automated Red Teaming with Inspect, promptfoo, and garak",
+      "duration": "75 min",
+      "learningObjective": "Configure automated red-team probes safely and interpret their limitations.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Promptfoo Red Teaming: A Beginner\u2019s Guide",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=y6Dlsz5P8s8",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Hands-on automated red-team workflow reference."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L7",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Evidence Triage and Vulnerability Reporting",
+      "duration": "60 min",
+      "learningObjective": "Convert red-team leads into evidence cards with severity, confidence, replication, and mitigation.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Test Your AI Like a Hacker \u2014 Promptfoo Tutorial",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=KghDstjwwNA",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Practical reference for triage and LLM app security testing."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P5.L8",
+      "phaseId": "P5",
+      "phaseTitle": "Red Teaming",
+      "lessonTitle": "Phase Studio: Threat and Vulnerability Report",
+      "duration": "75 min",
+      "learningObjective": "Write a professional red-team report with findings, evidence, mitigations, and residual risk.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Red Teaming Language Models with Language Models \u2014 Paper Discussion",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=2V3MXzAPQpw",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Paper-oriented reference for converting red-team findings into reusable evals."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P6.L1",
+      "phaseId": "P6",
+      "phaseTitle": "Enterprise Pipeline",
+      "lessonTitle": "Telemetry and Production Evaluation",
+      "duration": "60 min",
+      "learningObjective": "Define production telemetry that supports safety, quality, cost, and drift decisions.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Drift Monitoring and Evaluation for LLM Apps",
+        "provider": "YouTube / Evidently AI",
+        "url": "https://www.youtube.com/watch?v=eQ6cGzDUtMU",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Production monitoring and drift reference."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P6.L2",
+      "phaseId": "P6",
+      "phaseTitle": "Enterprise Pipeline",
+      "lessonTitle": "TTFT, Latency, Concurrency, and Cost",
+      "duration": "45 min",
+      "learningObjective": "Measure service-level performance without confusing speed with capability or safety.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "LLM Inference Performance: Latency and Throughput Metrics",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=DW-mo65DJ-Q",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Direct reference for TTFT, throughput, and latency tradeoffs."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P6.L3",
+      "phaseId": "P6",
+      "phaseTitle": "Enterprise Pipeline",
+      "lessonTitle": "Drift, Regression Gates, and CI/CD",
+      "duration": "75 min",
+      "learningObjective": "Create release and CI gates that catch quality, safety, and behavior regressions.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Evidently AI Tutorial \u2014 Open Source ML Models Monitoring and Testing",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=cgc3dSEAel0",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Practical monitoring/testing reference for CI/CD gates."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P6.L4",
+      "phaseId": "P6",
+      "phaseTitle": "Enterprise Pipeline",
+      "lessonTitle": "Threshold Memos and Governance Frameworks",
+      "duration": "60 min",
+      "learningObjective": "Translate evaluation evidence into threshold memos aligned with governance frameworks.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "80,000 Hours Podcast \u2014 Anthropic\u2019s Responsible Scaling Policy with Nick Joseph",
+        "provider": "Podcast / YouTube optional on page",
+        "url": "https://80000hours.org/podcast/episodes/nick-joseph-anthropic-safety-approach-responsible-scaling/",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Governance framework reference for threshold memos and deployment gates."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P6.L5",
+      "phaseId": "P6",
+      "phaseTitle": "Enterprise Pipeline",
+      "lessonTitle": "Capstone Studio: Aster-3 Evaluation Dossier",
+      "duration": "90 min",
+      "learningObjective": "Assemble phase artifacts into a pre-deployment evaluation dossier for Aster-3 Frontier.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Deep Dive into LLM Evaluation with Weights & Biases",
+        "provider": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7EcznH0-of8",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Supports capstone evidence collection, experiment tracking, and eval reporting."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    },
+    {
+      "lessonId": "P6.L6",
+      "phaseId": "P6",
+      "phaseTitle": "Enterprise Pipeline",
+      "lessonTitle": "Final Portfolio Export, QA, and Deployment Gate",
+      "duration": "30 min",
+      "learningObjective": "Run the final QA checklist and export a professional evaluation portfolio.",
+      "mediaRole": "reference_video_not_course_owned",
+      "primaryExternalMedia": {
+        "title": "Software Engineering and LLM Evaluation",
+        "provider": "YouTube",
+        "url": "https://m.youtube.com/watch?v=tIgPbjPav4o",
+        "status": "external_reference_unverified",
+        "embedVerified": false,
+        "embedCheckRequired": true,
+        "displayLabel": "Reference video",
+        "whyThisVideo": "Portfolio/export reference for communicating software-eval results."
+      },
+      "fallbackRequired": true,
+      "fallbackUI": [
+        "Open on provider",
+        "Mark as watched after viewing",
+        "One-sentence reflection required"
+      ],
+      "trackingModes": [
+        "embedded_tracking_if_available",
+        "external_fallback_tracking_if_blocked"
+      ],
+      "transcriptDrawer": {
+        "contentType": "authored_course_script",
+        "thirdPartyTranscriptAllowed": false,
+        "scriptAvailableInPhasePatch": true
+      },
+      "qaRules": [
+        "no duplicate URL across lessons",
+        "lesson objective must match media",
+        "runtime embed check required",
+        "fallback state required"
+      ]
+    }
+  ]
+}
