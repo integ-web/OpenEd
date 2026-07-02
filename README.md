@@ -1,5 +1,7 @@
 # OpenEd
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://integ-web.github.io/OpenEd/)
+
 OpenEd is a free AI-native learning platform where courses are source-mapped, tutor-assisted, practice-driven, artifact-based, and proof-producing.
 
 FME, Frontier Model Evaluations, is the first flagship course direction inside OpenEd. The current runtime ships as a demo preview, not the full course.
