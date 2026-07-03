@@ -1,4 +1,4 @@
-import{g as l,a as h}from"./index-DVtuBzVM.js";async function w(a,s,n,o,e){if(e.provider==="mock")return l(a,s,n);const r=h();if(!r)throw new Error("No API key configured for BYOK Tutor.");const i=[{role:"system",content:`You are the OpenEd BYOK Tutor. You are helping a learner with the lesson "${s}". 
+import{g as l,a as h}from"./index-C6xD7BGw.js";async function w(a,s,n,o,e){if(e.provider==="mock")return l(a,s,n);const r=h();if(!r)throw new Error("No API key configured for BYOK Tutor.");const i=[{role:"system",content:`You are the OpenEd BYOK Tutor. You are helping a learner with the lesson "${s}". 
 Your answers should be pedagogical, guiding the learner to the answer rather than giving it directly.
 Base your guidance strictly on the following sources if relevant:
 ${n.map((t,u)=>`[${u+1}] ${t}`).join(`
