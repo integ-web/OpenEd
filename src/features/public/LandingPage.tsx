@@ -1,49 +1,62 @@
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles, Layout, ShieldCheck, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import { fmeCourse } from "../../data/fme";
+import { Button } from "../../components/ui/button";
 
 export function LandingPage() {
   return (
-    <section className="hero-grid">
-      <div className="hero-copy">
-        <p className="eyebrow">OpenEd Platform</p>
-        <h1>Learn with sources, practice, AI help, and proof.</h1>
-        <p className="lede">
-          OpenEd is a free AI-native learning platform. Jump straight into our flagship Frontier Model Evaluations curriculum, containing 40 comprehensive lessons mapped to primary research sources.
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] bg-background px-4 py-16">
+      <div className="max-w-4xl text-center space-y-8">
+        <p className="text-sm font-semibold tracking-widest text-primary uppercase">Frontier Model Evaluation</p>
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
+          Learn to prove frontier AI is safe enough to ship
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          A 51-hour video-first course on threat models, benchmarks, red teaming, harnesses, evidence, and release
+          decisions for frontier AI systems.
         </p>
-        <div className="hero-actions">
-          <Link className="button" to="/courses/fme">
-            Explore FME <ArrowRight size={16} />
-          </Link>
-          <Link className="button secondary" to="/signup">
-            Create account
-          </Link>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+          <Button asChild size="lg" className="w-full sm:w-auto">
+            <Link to="/courses/fme">
+              Start learning <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+            <Link to="/courses/fme">Preview the course</Link>
+          </Button>
         </div>
       </div>
-      <div className="course-panel" aria-label="Featured OpenEd course">
-        <div className="panel-topline">
-          <span>{fmeCourse.eyebrow}</span>
-          <Sparkles size={16} />
+
+      {/* Feature grid below hero */}
+      <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl w-full">
+        <div className="flex flex-col items-center text-center space-y-4 p-6 rounded-xl border bg-card text-card-foreground shadow-sm">
+          <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+            <PlayCircle className="h-6 w-6 text-primary" />
+          </div>
+          <h3 className="font-semibold text-lg">6-Phase Video Path</h3>
+          <p className="text-sm text-muted-foreground">
+            Structured Coursera-style video learning focusing on evaluator training.
+          </p>
         </div>
-        <h2>{fmeCourse.title}</h2>
-        <p>{fmeCourse.promise}</p>
-        <div className="metrics-row">
-          <span>{fmeCourse.hours}h</span>
-          <span>{fmeCourse.lessons} lessons</span>
-          <span>{fmeCourse.level}</span>
+        <div className="flex flex-col items-center text-center space-y-4 p-6 rounded-xl border bg-card text-card-foreground shadow-sm">
+          <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+            <Sparkles className="h-6 w-6 text-primary" />
+          </div>
+          <h3 className="font-semibold text-lg">AI Coach</h3>
+          <p className="text-sm text-muted-foreground">
+            A built-in BYOK AI tutor that helps you understand threat models and evaluate artifacts.
+          </p>
         </div>
-        <ul className="check-list">
-          <li>
-            <CheckCircle2 size={16} /> Source-mapped learning
-          </li>
-          <li>
-            <CheckCircle2 size={16} /> BYOK tutor support
-          </li>
-          <li>
-            <CheckCircle2 size={16} /> Artifact-based proof
-          </li>
-        </ul>
+        <div className="flex flex-col items-center text-center space-y-4 p-6 rounded-xl border bg-card text-card-foreground shadow-sm">
+          <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+            <ShieldCheck className="h-6 w-6 text-primary" />
+          </div>
+          <h3 className="font-semibold text-lg">Artifact Portfolio</h3>
+          <p className="text-sm text-muted-foreground">
+            Every phase produces tangible evidence for a capstone release decision.
+          </p>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

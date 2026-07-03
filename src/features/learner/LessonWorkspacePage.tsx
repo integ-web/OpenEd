@@ -1,5 +1,5 @@
-import { BookOpen, FileText, PlayCircle, Sparkles, Wrench } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { BookOpen, FileText, PlayCircle, Sparkles, Wrench, Send, CheckCircle2 } from "lucide-react";
+import { FormEvent, useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   getArtifactForLesson,
@@ -9,9 +9,17 @@ import {
   getSourcesForLesson,
 } from "../../data/fme";
 import { useProof } from "../proof/useProof";
-import { groundedTutorReply, hasBrowserKey } from "../tutor/byokStore";
+import { hasBrowserKey } from "../tutor/byokStore";
 import { useTutorPreferences } from "../tutor/useTutorPreferences";
 import { useFmeProgress } from "./useFmeProgress";
+
+import { Button } from "../../components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
+import { ScrollArea } from "../../components/ui/scroll-area";
+import { Badge } from "../../components/ui/badge";
 
 export function LessonWorkspacePage() {
   const { lessonId } = useParams();
@@ -20,20 +28,31 @@ export function LessonWorkspacePage() {
   const quiz = getQuizForLesson(lesson.id);
   const artifact = getArtifactForLesson(lesson.id);
   const rubric = artifact ? getRubricForArtifact(artifact.id) : undefined;
+  
   const { progress, savePractice, completeQuiz, submitArtifact } = useFmeProgress();
-  const [activeTab, setActiveTab] = useState<"learn" | "sources" | "practice" | "build">("learn");
   const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
   const [artifactText, setArtifactText] = useState(progress.artifacts[lesson.id] ?? artifact?.template ?? "");
+  
   const [tutorInput, setTutorInput] = useState("");
   const [tutorMessages, setTutorMessages] = useState<Array<{ role: "learner" | "tutor"; text: string }>>([
     {
       role: "tutor",
-      text: `I can help with ${lesson.title}. I will stay grounded in this lesson, your artifact state, and mapped sources.`,
+      text: `I can help with ${lesson.title}. I am grounded in this lesson's objective: "${lesson.objective}". Ask me anything!`,
     },
   ]);
+  const [isTutorTyping, setIsTutorTyping] = useState(false);
+  
   const { preferences: byok } = useTutorPreferences();
   const keyReady = hasBrowserKey() || byok.provider === "mock";
   const { submitArtifact: submitProofArtifact } = useProof();
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [tutorMessages]);
 
   function handlePractice(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,8 +66,6 @@ export function LessonWorkspacePage() {
     void submitProofArtifact(lesson.id, artifactText);
   }
 
-  const [isTutorTyping, setIsTutorTyping] = useState(false);
-  
   async function askTutor(prompt: string) {
     const newHistory = [...tutorMessages, { role: "learner" as const, text: prompt }];
     setTutorMessages(newHistory);
@@ -61,225 +78,253 @@ export function LessonWorkspacePage() {
         prompt,
         lesson.title,
         sources.map((source) => source.title),
-        tutorMessages, // old history
+        tutorMessages,
         byok
       );
       setTutorMessages([...newHistory, { role: "tutor", text: reply }]);
     } catch (err) {
-      setTutorMessages([...newHistory, { role: "tutor", text: "Tutor error: Please check your BYOK settings and API key." }]);
+      setTutorMessages([...newHistory, { role: "tutor", text: "Tutor error: Please check your BYOK settings." }]);
     } finally {
       setIsTutorTyping(false);
     }
   }
 
   return (
-    <section className="lesson-shell">
-      <div className="lesson-main">
-        <p className="eyebrow">FME lesson {lesson.id}</p>
-        <h1>{lesson.title}</h1>
-        <div className="tab-strip" role="tablist" aria-label="Lesson workspace areas">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "learn"}
-            className={activeTab === "learn" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("learn")}
-          >
-            <PlayCircle size={15} /> Learn
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "sources"}
-            className={activeTab === "sources" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("sources")}
-          >
-            <BookOpen size={15} /> Sources ({sources.length})
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "practice"}
-            className={activeTab === "practice" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("practice")}
-          >
-            <Wrench size={15} /> Practice
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeTab === "build"}
-            className={activeTab === "build" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("build")}
-          >
-            <FileText size={15} /> Build {artifact ? "Artifact" : ""}
-          </button>
-        </div>
+    <div className="flex h-[calc(100vh-64px)] overflow-hidden bg-background">
+      {/* Main Content Area */}
+      <div className="flex-1 overflow-y-auto p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="space-y-2">
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest">Lesson {lesson.id}</p>
+            <h1 className="text-3xl font-bold tracking-tight">{lesson.title}</h1>
+            <p className="text-muted-foreground">{lesson.objective}</p>
+          </div>
 
-        {activeTab === "learn" && (
-          <>
-            <article className="workspace-panel">
-              <h2>Objective</h2>
-              <p>{lesson.objective}</p>
-              <h2>Transcript</h2>
-              <p>{lesson.transcript}</p>
-              <div className="source-chip-row" style={{ marginTop: "1rem" }}>
-                <span>{sources.length} mapped sources</span>
-                <span>Artifact: {artifact?.title ?? "Lesson note"}</span>
-              </div>
-            </article>
-
-
-
-            {quiz && (
-              <article className="workspace-panel">
-                <h2>Check Understanding (Quiz)</h2>
-                <p>{quiz.prompt}</p>
-                <div className="choice-list">
-                  {quiz.choices.map((choice, index) => (
-                    <button
-                      key={choice}
-                      className={quizAnswer === index ? "choice selected" : "choice"}
-                      type="button"
-                      onClick={() => {
-                        setQuizAnswer(index);
-                        if (index === quiz.answerIndex) completeQuiz(lesson.id);
-                      }}
-                    >
-                      {choice}
-                    </button>
-                  ))}
+          <Tabs defaultValue="learn" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 lg:w-[500px]">
+              <TabsTrigger value="learn"><PlayCircle className="w-4 h-4 mr-2" /> Learn</TabsTrigger>
+              <TabsTrigger value="sources"><BookOpen className="w-4 h-4 mr-2" /> Sources</TabsTrigger>
+              <TabsTrigger value="practice"><Wrench className="w-4 h-4 mr-2" /> Practice</TabsTrigger>
+              <TabsTrigger value="build"><FileText className="w-4 h-4 mr-2" /> Build</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="learn" className="mt-6 space-y-6">
+              <Card>
+                <div className="aspect-video bg-muted flex items-center justify-center rounded-t-lg relative">
+                  <PlayCircle className="w-16 h-16 text-muted-foreground/50" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/5 opacity-0 hover:opacity-100 transition-opacity">
+                    <Button variant="secondary">Play Lesson Video</Button>
+                  </div>
                 </div>
-                {quizAnswer !== null && (
-                  <p
-                    style={{ marginTop: "1rem" }}
-                    className={quizAnswer === quiz.answerIndex ? "success-text" : "form-error"}
-                  >
-                    {quizAnswer === quiz.answerIndex
-                      ? quiz.feedback
-                      : "Not quite. Recheck how outcome and trajectory signals differ."}
-                  </p>
-                )}
-              </article>
-            )}
-          </>
-        )}
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold text-lg mb-2">Transcript</h3>
+                  <div className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
+                    {lesson.transcript}
+                  </div>
+                </CardContent>
+              </Card>
 
-        {activeTab === "sources" && (
-          <article className="workspace-panel">
-            <h2>Source Drawer</h2>
-            <p>Mapped primary sources and papers to support lesson concepts.</p>
-            <div className="source-list">
-              {sources.map((source) => (
-                <a key={source.id} className="source-card" href={source.url} target="_blank" rel="noreferrer">
-                  <strong>{source.title}</strong>
-                  <span>
-                    {source.organization} · {source.type} · {source.required ? "Required" : "Optional"}
-                  </span>
-                </a>
-              ))}
-              {sources.length === 0 && <p className="muted">No sources are mapped to this lesson.</p>}
-            </div>
-          </article>
-        )}
-
-        {activeTab === "practice" && (
-          <form className="workspace-panel" onSubmit={handlePractice}>
-            <h2>Practice Task</h2>
-            <p>{lesson.practicePrompt}</p>
-            <textarea
-              name="practice"
-              rows={5}
-              defaultValue={progress.practice[lesson.id] ?? ""}
-              placeholder="Write your evaluator judgment..."
-              aria-label="Practice judgment"
-            />
-            <button className="button" type="submit" style={{ marginTop: "1rem" }}>
-              Save practice response
-            </button>
-          </form>
-        )}
-
-        {activeTab === "build" &&
-          (artifact ? (
-            <form className="workspace-panel" onSubmit={handleArtifact}>
-              <h2>Build artifact: {artifact.title}</h2>
-              <p>{artifact.prompt}</p>
-              <textarea
-                rows={8}
-                value={artifactText}
-                onChange={(event) => setArtifactText(event.target.value)}
-                aria-label="Build artifact text"
-              />
-              {rubric && (
-                <div
-                  style={{ marginTop: "1rem", padding: "12px", background: "var(--panel-strong)", borderRadius: "8px" }}
-                >
-                  <strong>Rubric Criteria:</strong>
-                  <ul style={{ margin: "5px 0 0 0", paddingLeft: "20px" }}>
-                    {rubric.criteria.map((criterion) => (
-                      <li key={criterion.id} className="muted" style={{ fontSize: "0.85rem" }}>
-                        {criterion.label} (Points: {criterion.maxScore})
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {quiz && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Check Understanding</CardTitle>
+                    <CardDescription>{quiz.prompt}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      {quiz.choices.map((choice, index) => (
+                        <div
+                          key={index}
+                          onClick={() => {
+                            setQuizAnswer(index);
+                            if (index === quiz.answerIndex) completeQuiz(lesson.id);
+                          }}
+                          className={`p-4 rounded-lg border cursor-pointer transition-colors ${
+                            quizAnswer === index 
+                              ? index === quiz.answerIndex 
+                                ? 'border-primary bg-primary/5' 
+                                : 'border-destructive bg-destructive/5'
+                              : 'hover:border-primary/50'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                              quizAnswer === index 
+                                ? index === quiz.answerIndex ? 'border-primary text-primary' : 'border-destructive text-destructive'
+                                : 'border-muted-foreground'
+                            }`}>
+                              {quizAnswer === index && <CheckCircle2 className="w-3 h-3" />}
+                            </div>
+                            <span className="text-sm">{choice}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {quizAnswer !== null && (
+                      <p className={`mt-4 text-sm font-medium ${quizAnswer === quiz.answerIndex ? "text-primary" : "text-destructive"}`}>
+                        {quizAnswer === quiz.answerIndex ? quiz.feedback : "Not quite. Try reviewing the transcript."}
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
               )}
-              <button className="button" type="submit" style={{ marginTop: "1rem" }}>
-                Submit artifact for review
-              </button>
-            </form>
-          ) : (
-            <article className="workspace-panel">
-              <h2>Build</h2>
-              <p className="muted">
-                No build artifact is required for this lesson. Complete the practice tasks or check mapped sources to
-                reinforce learning.
-              </p>
-            </article>
-          ))}
-      </div>
-      <aside className="tutor-panel">
-        <Sparkles size={18} />
-        <h2>AI BYOK Tutor</h2>
-        <p>
-          {keyReady ? `Connected: ${byok.provider} / ${byok.model}` : "Add a browser-only key or switch to mock mode."}
-          Your API keys are stored securely in your browser's local storage and never touch our servers. The AI is fully grounded in your lesson context.
-        </p>
-        <div className="prompt-grid">
-          {["Explain simply", "Quiz me", "Help with artifact", "Cite sources", "Show visual anchor"].map((prompt) => (
-            <button key={prompt} className="tab" type="button" onClick={() => askTutor(prompt)}>
-              {prompt}
-            </button>
-          ))}
+            </TabsContent>
+
+            <TabsContent value="sources" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Source Drawer</CardTitle>
+                  <CardDescription>Mapped primary sources and papers</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {sources.length === 0 ? (
+                    <p className="text-muted-foreground text-sm">No sources are mapped to this lesson.</p>
+                  ) : (
+                    sources.map((source) => (
+                      <a key={source.id} href={source.url} target="_blank" rel="noreferrer" className="block p-4 rounded-lg border hover:border-primary/50 transition-colors">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h4 className="font-semibold">{source.title}</h4>
+                            <p className="text-sm text-muted-foreground mt-1">{source.organization} · {source.type}</p>
+                          </div>
+                          <Badge variant={source.required ? "default" : "secondary"}>
+                            {source.required ? "Required" : "Optional"}
+                          </Badge>
+                        </div>
+                      </a>
+                    ))
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="practice" className="mt-6">
+              <Card>
+                <form onSubmit={handlePractice}>
+                  <CardHeader>
+                    <CardTitle>Practice Task</CardTitle>
+                    <CardDescription>{lesson.practicePrompt}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Textarea
+                      name="practice"
+                      rows={6}
+                      defaultValue={progress.practice[lesson.id] ?? ""}
+                      placeholder="Write your evaluator judgment..."
+                      className="resize-none"
+                    />
+                  </CardContent>
+                  <CardFooter>
+                    <Button type="submit">Save Practice Response</Button>
+                  </CardFooter>
+                </form>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="build" className="mt-6">
+              {artifact ? (
+                <Card>
+                  <form onSubmit={handleArtifact}>
+                    <CardHeader>
+                      <CardTitle>Build Artifact: {artifact.title}</CardTitle>
+                      <CardDescription>{artifact.prompt}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <Textarea
+                        rows={10}
+                        value={artifactText}
+                        onChange={(e) => setArtifactText(e.target.value)}
+                        className="font-mono text-sm resize-y"
+                      />
+                      
+                      {rubric && (
+                        <div className="p-4 bg-muted rounded-lg border">
+                          <h4 className="font-semibold text-sm mb-3">Rubric Criteria</h4>
+                          <ul className="space-y-2">
+                            {rubric.criteria.map((c) => (
+                              <li key={c.id} className="text-sm text-muted-foreground flex justify-between">
+                                <span>• {c.label}</span>
+                                <span className="font-medium">{c.maxScore} pts</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </CardContent>
+                    <CardFooter>
+                      <Button type="submit">Submit for Review</Button>
+                    </CardFooter>
+                  </form>
+                </Card>
+              ) : (
+                <Card>
+                  <CardContent className="pt-6 text-center text-muted-foreground">
+                    <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>No build artifact required for this lesson.</p>
+                  </CardContent>
+                </Card>
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
-        <div className="message-list" aria-live="polite">
-          {tutorMessages.map((message, index) => (
-            <div
-              key={`${message.role}-${index}`}
-              className={message.role === "learner" ? "message learner-message" : "message tutor-message"}
-            >
-              {message.text}
+      </div>
+
+      {/* Tutor Right Rail */}
+      <div className="w-80 lg:w-96 border-l bg-card flex flex-col hidden md:flex">
+        <div className="p-4 border-b">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="w-5 h-5 text-primary" />
+            <h2 className="font-semibold">AI Coach</h2>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {keyReady ? `Connected via ${byok.provider}` : "Add a BYOK key in settings."} Fully grounded in current lesson context.
+          </p>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4 space-y-4" ref={scrollRef}>
+          {tutorMessages.map((m, i) => (
+            <div key={i} className={`flex ${m.role === 'learner' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[85%] rounded-lg p-3 text-sm ${
+                m.role === 'learner' 
+                  ? 'bg-primary text-primary-foreground rounded-br-none' 
+                  : 'bg-muted text-foreground rounded-bl-none'
+              }`}>
+                {m.text}
+              </div>
             </div>
           ))}
+          {isTutorTyping && (
+            <div className="flex justify-start">
+              <div className="max-w-[85%] rounded-lg p-3 text-sm bg-muted text-foreground rounded-bl-none flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" />
+                <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+              </div>
+            </div>
+          )}
         </div>
-        <form
-          className="tutor-compose"
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (tutorInput.trim()) askTutor(tutorInput);
-          }}
-        >
-          <input
-            value={tutorInput}
-            onChange={(event) => setTutorInput(event.target.value)}
-            placeholder="Ask from lesson context..."
-          />
-          <button className="button secondary" type="submit">
-            Ask
-          </button>
-        </form>
-      </aside>
-    </section>
+
+        <div className="p-4 border-t bg-background">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {["Explain simply", "Quiz me", "Cite sources"].map((prompt) => (
+              <Badge key={prompt} variant="secondary" className="cursor-pointer hover:bg-secondary/80" onClick={() => askTutor(prompt)}>
+                {prompt}
+              </Badge>
+            ))}
+          </div>
+          <form onSubmit={(e) => { e.preventDefault(); if (tutorInput.trim()) askTutor(tutorInput); }} className="flex gap-2">
+            <Input 
+              value={tutorInput}
+              onChange={(e) => setTutorInput(e.target.value)}
+              placeholder="Ask the AI Coach..."
+              className="flex-1"
+            />
+            <Button type="submit" size="icon" disabled={isTutorTyping || !tutorInput.trim()}>
+              <Send className="w-4 h-4" />
+            </Button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }

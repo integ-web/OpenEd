@@ -2,13 +2,17 @@ import { FormEvent, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/providers";
 import { sanitizeRedirectTarget } from "../../shared/utils/authRedirects";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
 
 type AuthPageProps = {
   mode: "login" | "signup";
 };
 
 export function AuthPage({ mode }: AuthPageProps) {
-  const { isAuthenticated, signIn, signUp, isMockAuth } = useAuth();
+  const { isAuthenticated, signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState("");
@@ -39,43 +43,62 @@ export function AuthPage({ mode }: AuthPageProps) {
   }
 
   return (
-    <section className="auth-shell">
-      <form className="form-card" onSubmit={handleSubmit}>
-        <p className="eyebrow">{mode === "login" ? "Welcome back" : "Join OpenEd"}</p>
-        <h1>{mode === "login" ? "Log in" : "Create account"}</h1>
-        {mode === "signup" && (
-          <label>
-            Full name
-            <input name="fullName" type="text" placeholder="Your name" required />
-          </label>
-        )}
-        <label>
-          Email
-          <input name="email" type="email" placeholder="you@example.com" required />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" placeholder="At least 8 characters" required />
-        </label>
-        {error && (
-          <p className="form-error" role="alert">
-            {error}
+    <section className="flex min-h-[calc(100vh-64px)] items-center justify-center p-4 bg-background">
+      <Card className="w-full max-w-sm">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl font-bold">{mode === "login" ? "Welcome back" : "Join OpenEd"}</CardTitle>
+          <CardDescription>
+            {mode === "login" ? "Log in to your account" : "Create an account to track your progress"}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {mode === "signup" && (
+              <div className="space-y-2">
+                <Label htmlFor="fullName">Full Name</Label>
+                <Input id="fullName" name="fullName" placeholder="Your name" required />
+              </div>
+            )}
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" name="password" type="password" placeholder="At least 8 characters" required />
+            </div>
+            {error && <p className="text-sm font-medium text-destructive">{error}</p>}
+            <Button type="submit" className="w-full">
+              {mode === "login" ? "Log in" : "Sign up"}
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex flex-col items-center gap-2">
+          {mode === "login" ? (
+            <p className="text-sm text-muted-foreground">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-primary hover:underline">
+                Sign up
+              </Link>
+            </p>
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Already have an account?{" "}
+              <Link to="/login" className="text-primary hover:underline">
+                Log in
+              </Link>
+            </p>
+          )}
+          {mode === "login" && (
+            <Link to="/forgot-password" className="text-sm text-primary hover:underline mt-2">
+              Forgot password?
+            </Link>
+          )}
+          <p className="text-xs text-muted-foreground mt-4 text-center">
+            Local browser storage is active. Your session is saved locally.
           </p>
-        )}
-        <button className="button" type="submit">
-          {mode === "login" ? "Log in" : "Sign up"}
-        </button>
-        {mode === "login" && (
-          <Link className="text-button" to="/forgot-password">
-            Forgot password?
-          </Link>
-        )}
-        <p className="muted">
-          {isMockAuth
-            ? "Local dev fallback is active because Supabase env vars are absent."
-            : "Supabase auth is active."}
-        </p>
-      </form>
+        </CardFooter>
+      </Card>
     </section>
   );
 }
