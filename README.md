@@ -1,109 +1,102 @@
-# OpenEd
+# OpenEd v1 🎓
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://integ-web.github.io/OpenEd/)
 
-OpenEd is a free AI-native learning platform where courses are source-mapped, tutor-assisted, practice-driven, artifact-based, and proof-producing.
+> The open-source, educator-first platform for interactive, frontier model evaluation courses. OpenEd is a free AI-native learning platform where courses are source-mapped, tutor-assisted, practice-driven, artifact-based, and proof-producing.
 
-FME, Frontier Model Evaluations, is the first flagship course direction inside OpenEd. The current runtime ships as a demo preview, not the full course.
+![OpenEd Application Overview](https://i.imgur.com/Kz3ZpD2.png)
 
-## V1 Scope
+OpenEd is a React-based Single Page Application (SPA) built for modern learning. It supports rich course hydration, dynamic AI coaching with Bring Your Own Key (BYOK) architecture, structured artifact-based assessment, and seamless transition from local-only storage to cloud-based persistence (via Supabase).
 
-OpenEd v1 includes three user types:
+---
 
-- Learner
-- Educator
-- OpenEd Team
+## 🌟 Key Features
 
-V1 includes:
+### 1. Educator Studio & Proof Engine
+* **No-Code Editor:** Educators can create structured courses using a nested, tabbed editor interface (Basics & Outcomes, Lessons & Mappings, Preview & QA).
+* **Assessment Engine:** Integrated artifact review system that enables educators to easily evaluate submissions against predefined rubrics and issue portfolio-grade proofs.
 
-- Public landing and course catalog
-- Learner App
-- FME course runtime
-- Educator Studio
-- Assessment and Proof Engine
-- BYOK AI Tutor
-- OpenEd Team Console
-- Supabase auth/profile/RLS foundation
+### 2. Client-First BYOK Tutor Integration
+* **100% Local Keys:** True privacy for learners. API keys for OpenAI, Anthropic, Gemini, and OpenRouter are stored *strictly* in the browser's `localStorage` or `sessionStorage`.
+* **Grounded AI Coaching:** Context-aware prompts ensure the AI tutor coaches the student based solely on lesson parameters and mapped academic sources, rather than generic hallucination.
 
-V1 intentionally excludes university portals, organization portals, employer dashboards, payments, social feeds, and full proctoring.
+### 3. Graceful Persistence Layer
+* **Offline First & Cloud Ready:** Features a dual-tiered repository system. Read and write operations flawlessly fall back to `localStorage` when offline or when a backend database isn't provisioned.
+* **Instant Backend Upgrade:** Hooked up to Supabase SDK natively. Pushing the Postgres schema instantly promotes the application to a cloud-synced, multi-tenant app without rewriting a single line of React.
 
-## Tech Stack
+### 4. Course Hydration Engine
+* Includes robust tooling to dynamically hydrate massive Markdown curriculum compendiums directly into strongly-typed TypeScript structures (Phases, Lessons, Quizzes, Rubrics).
 
-- React
-- TypeScript
-- Vite
-- React Router
-- Supabase client
-- CSS token/theme layer
+---
 
-## Getting Started
+## 🏗️ Technical Architecture
 
-Install dependencies:
+### Tech Stack
+- **Framework:** React 18 & Vite
+- **Routing:** React Router v6
+- **Styling:** Vanilla CSS & Lucide Icons
+- **Persistence:** LocalStorage API + Supabase JS SDK (PostgreSQL)
+- **Tooling:** TypeScript
 
-```bash
-npm install
-```
+### Project Structure
 
-Start local development:
-
-```bash
-npm run dev
-```
-
-Build for production:
-
-```bash
-npm run build
-```
-
-## Environment
-
-Copy `.env.example` to `.env` and set:
-
-```text
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-```
-
-If these variables are absent in local development, the app uses a mock auth fallback. Never expose a Supabase service role key in the frontend.
-
-## Key Routes
-
-- `/` public landing
-- `/courses` course catalog
-- `/courses/fme` public FME preview
-- `/login` and `/signup`
-- `/learn` learner dashboard
-- `/learn/courses/fme` FME runtime overview
-- `/learn/courses/fme/lesson/:lessonId` lesson workspace
-- `/learn/portfolio` SkillProof portfolio
-- `/educator` Educator Studio
-- `/educator/courses/new` course creation wizard
-- `/educator/proof-review` artifact review
-- `/team` OpenEd Team Console
-- `/team/review-queue` course review queue
-- `/settings/byok` BYOK setup
-
-## Project Structure
-
-```text
+\`\`\`text
 src/
-  app/                 route shell, providers, router
-  data/fme/            FME seed data
-  features/auth/       login/signup UI
-  features/learner/    learner app and progress
-  features/educator/   educator studio workflows
-  features/proof/      assessment/proof engine
-  features/team/       OpenEd Team console
-  features/tutor/      BYOK and tutor state
-  shared/theme/        visual tokens and app CSS
-supabase/migrations/   schema and RLS foundation
-reference/figma-drops/ archived Figma exports for reference
-docs/                  deployment notes
-```
+├── app/          # App shell, routing, and global providers
+├── data/         # Statically hydrated curriculum models
+├── features/     # Feature-sliced components (Auth, Courses, Educator, Learner, Tutor)
+├── lib/          # Database repositories and Supabase initialization
+└── shared/       # Shared UI components and hooks
+\`\`\`
 
-## Supabase
+---
 
-Apply migrations from `supabase/migrations` in order. The first migration creates the v1 foundation tables and RLS policies for profiles, courses, lessons, sources, progress, quizzes, artifacts, rubrics, portfolio items, reviews, moderation reports, tutor sessions, and BYOK preferences without keys.
+## 🚀 Getting Started
 
-BYOK keys are never stored in Supabase. The app stores them only in browser session storage or local storage after explicit user choice.
+### Prerequisites
+- Node.js 22.x
+- npm
+
+### Installation
+
+1. **Clone the repository:**
+   \`\`\`bash
+   git clone https://github.com/integ-web/OpenEd.git
+   cd OpenEd
+   \`\`\`
+
+2. **Install dependencies:**
+   \`\`\`bash
+   npm install
+   \`\`\`
+
+3. **Start the development server:**
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+### Supabase Backend Deployment (Optional)
+
+By default, the application runs perfectly using local browser storage. If you want to enable cloud-sync, true IAM role segregation, and database persistence, deploy the backend schema:
+
+1. **Link your project:**
+   \`\`\`bash
+   npx supabase link --project-ref <your-project-id>
+   \`\`\`
+2. **Push the schema:**
+   \`\`\`bash
+   npx supabase db push
+   \`\`\`
+
+---
+
+## 📝 Scripts
+
+- \`npm run dev\` - Starts the local development server.
+- \`npm run build\` - Compiles TypeScript and builds the Vite production bundle.
+- \`npm run hydrate\` - Parses the course Markdown compendium and builds the \`src/data\` TypeScript constants.
+
+---
+
+## 🤝 Contributing
+OpenEd is driven by the community. We welcome contributions to the Educator Studio, the Assessment Engine, and the core curriculum.

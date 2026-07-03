@@ -40,6 +40,10 @@ export function deleteBrowserKey() {
   window.dispatchEvent(new Event("opened-byok"));
 }
 
+export function getBrowserKey(): string | null {
+  return sessionStorage.getItem(sessionKey) || localStorage.getItem(localKey) || null;
+}
+
 export function groundedTutorReply(prompt: string, lessonTitle: string, sourceTitles: string[]) {
   const normalized = prompt.toLowerCase();
   const sourceRef = sourceTitles.length

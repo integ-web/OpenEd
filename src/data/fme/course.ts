@@ -1,18 +1,12 @@
 export const fmeCourse = {
   id: "fme",
   title: "Frontier Model Evaluations",
-  eyebrow: "Demo preview",
-  hours: 4,
-  lessons: 4,
-  level: "Intermediate",
+  eyebrow: "Core Course",
   promise:
-    "Preview how OpenEd teaches frontier model evaluation through source-mapped lessons, practice, artifacts, and proof.",
-  phases: [
-    { id: "P1", title: "Evaluation Foundations", progress: 42 },
-    { id: "P2", title: "Benchmarks and Judges", progress: 18 },
-    { id: "P3", title: "Trajectory Analysis", progress: 0 },
-    { id: "P4", title: "Capability and Safety Signals", progress: 0 },
-    { id: "P5", title: "Red Teaming", progress: 0 },
-  ],
-  sampleLessonId: "p1-l4",
+    "Learn to design harnesses, construct golden datasets, measure path quality, and run multi-turn agent evaluations for frontier systems.",
+  level: "Intermediate" as const,
+  hours: 51,
+  lessons: 40,
+  phases: 6,
+  sampleLessonId: "p1-l1",
 };

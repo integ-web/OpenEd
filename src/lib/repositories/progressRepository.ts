@@ -1,5 +1,6 @@
 import { supabase, supabaseConfigured } from "../supabase/client";
 import { readLocal, writeLocal } from "./localFallback";
+import { getFmeLessonByUuid, fmeLessons } from "../../data/fme/lessons";
 
 export type LessonProgress = {
   enrolled: boolean;
@@ -28,11 +29,15 @@ export const progressRepository = {
     const { data } = await supabase
       .from("lesson_progress")
       .select("lesson_id,completed,practice_completed,artifact_completed,quiz_completed");
-    if (!data) return initialProgress;
+      
+    if (!data) return readLocal("progress", userId, "fme", initialProgress); // Fallback if no DB connection
 
     return data.reduce<LessonProgress>(
       (acc, row) => {
-        const lessonId = String(row.lesson_id);
+        // Reverse lookup the string ID from the UUID if possible
+        const lesson = getFmeLessonByUuid(String(row.lesson_id));
+        const lessonId = lesson ? lesson.id : String(row.lesson_id);
+        
         if (row.completed) acc.completedLessons.push(lessonId);
         if (row.practice_completed) acc.practice[lessonId] = "saved";
         if (row.quiz_completed) acc.quiz[lessonId] = true;
@@ -47,6 +52,36 @@ export const progressRepository = {
     if (!supabaseConfigured || !userId) {
       writeLocal("progress", userId, "fme", progress, eventName);
       return progress;
+    }
+
+    // Attempt to write to Supabase
+    const rows = [];
+    const allLessonIds = new Set([
+      ...progress.completedLessons,
+      ...Object.keys(progress.practice),
+      ...Object.keys(progress.quiz),
+      ...Object.keys(progress.artifacts),
+    ]);
+
+    for (const id of allLessonIds) {
+      const lesson = fmeLessons.find(l => l.id === id);
+      if (lesson) {
+        rows.push({
+          user_id: userId,
+          lesson_id: lesson.uuid,
+          completed: progress.completedLessons.includes(id),
+          practice_completed: !!progress.practice[id],
+          artifact_completed: !!progress.artifacts[id],
+          quiz_completed: !!progress.quiz[id]
+        });
+      }
+    }
+
+    if (rows.length > 0) {
+      const { error } = await supabase.from("lesson_progress").upsert(rows);
+      if (error) {
+        console.warn("Failed to sync progress to Supabase", error);
+      }
     }
 
     writeLocal("progress", userId, "fme", progress, eventName);

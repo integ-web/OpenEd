@@ -47,14 +47,29 @@ export function LessonWorkspacePage() {
     void submitProofArtifact(lesson.id, artifactText);
   }
 
-  function askTutor(prompt: string) {
-    const reply = groundedTutorReply(
-      prompt,
-      lesson.title,
-      sources.map((source) => source.title),
-    );
-    setTutorMessages((messages) => [...messages, { role: "learner", text: prompt }, { role: "tutor", text: reply }]);
+  const [isTutorTyping, setIsTutorTyping] = useState(false);
+  
+  async function askTutor(prompt: string) {
+    const newHistory = [...tutorMessages, { role: "learner" as const, text: prompt }];
+    setTutorMessages(newHistory);
     setTutorInput("");
+    setIsTutorTyping(true);
+
+    try {
+      const { askRealTutor } = await import("../tutor/tutorApi");
+      const reply = await askRealTutor(
+        prompt,
+        lesson.title,
+        sources.map((source) => source.title),
+        tutorMessages, // old history
+        byok
+      );
+      setTutorMessages([...newHistory, { role: "tutor", text: reply }]);
+    } catch (err) {
+      setTutorMessages([...newHistory, { role: "tutor", text: "Tutor error: Please check your BYOK settings and API key." }]);
+    } finally {
+      setIsTutorTyping(false);
+    }
   }
 
   return (

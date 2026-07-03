@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { fmeCourse } from "../../data/fme";
+import { fmeCourse, fmeModules } from "../../data/fme";
 
 export function FmePublicPage() {
   return (
@@ -20,11 +20,11 @@ export function FmePublicPage() {
           </div>
         </div>
         <div className="signal-panel">
-          {fmeCourse.phases.map((phase) => (
+          {fmeModules.map((phase) => (
             <div key={phase.id} className="phase-row">
-              <span>{phase.id}</span>
+              <span>{phase.id.toUpperCase()}</span>
               <strong>{phase.title}</strong>
-              <progress value={phase.progress} max="100" aria-label={`${phase.title} preview progress`} />
+              <progress value={0} max="100" aria-label={`${phase.title} preview progress`} />
             </div>
           ))}
         </div>
