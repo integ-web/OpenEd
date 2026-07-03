@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Outlet, useLocation, useNavigate as useRouterNavigate } from 'react-router';
+import { Outlet, useLocation, useNavigate as useRouterNavigate } from 'react-router-dom';
 import {
   Shield, Moon, Sun, LayoutDashboard, Map, BookOpen,
   FileText, Package, BarChart3, GraduationCap,

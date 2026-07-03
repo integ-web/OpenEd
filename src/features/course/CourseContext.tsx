@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { useNavigate as useRouterNavigate } from 'react-router';
+import { useNavigate as useRouterNavigate } from 'react-router-dom';
 import { INITIAL_STATE, type CourseState, type ScreenId, type ScreenProps } from './course-types';
 import { useAuth } from '../../app/providers';
 
