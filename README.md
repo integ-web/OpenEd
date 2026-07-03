@@ -1,102 +1,128 @@
-# OpenEd v1 🎓
+<div align="center">
+  <img src="https://i.imgur.com/Kz3ZpD2.png" alt="OpenEd Banner" width="100%" />
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://integ-web.github.io/OpenEd/)
+  <h1>OpenEd 🎓</h1>
+  <p><strong>The open-source, educator-first platform for interactive, frontier model evaluation courses.</strong></p>
 
-> The open-source, educator-first platform for interactive, frontier model evaluation courses. OpenEd is a free AI-native learning platform where courses are source-mapped, tutor-assisted, practice-driven, artifact-based, and proof-producing.
+  <p>
+    <a href="https://integ-web.github.io/OpenEd/"><img src="https://img.shields.io/badge/Live-Demo-brightgreen.svg?style=for-the-badge" alt="Live Demo" /></a>
+    <img src="https://img.shields.io/badge/React-18-blue.svg?style=for-the-badge&logo=react" alt="React 18" />
+    <img src="https://img.shields.io/badge/Vite-6-646CFF.svg?style=for-the-badge&logo=vite" alt="Vite" />
+    <img src="https://img.shields.io/badge/TypeScript-5.7-3178C6.svg?style=for-the-badge&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Supabase-Ready-3ECF8E.svg?style=for-the-badge&logo=supabase" alt="Supabase Ready" />
+  </p>
+</div>
 
-![OpenEd Application Overview](https://i.imgur.com/Kz3ZpD2.png)
+<br />
 
-OpenEd is a React-based Single Page Application (SPA) built for modern learning. It supports rich course hydration, dynamic AI coaching with Bring Your Own Key (BYOK) architecture, structured artifact-based assessment, and seamless transition from local-only storage to cloud-based persistence (via Supabase).
-
----
-
-## 🌟 Key Features
-
-### 1. Educator Studio & Proof Engine
-* **No-Code Editor:** Educators can create structured courses using a nested, tabbed editor interface (Basics & Outcomes, Lessons & Mappings, Preview & QA).
-* **Assessment Engine:** Integrated artifact review system that enables educators to easily evaluate submissions against predefined rubrics and issue portfolio-grade proofs.
-
-### 2. Client-First BYOK Tutor Integration
-* **100% Local Keys:** True privacy for learners. API keys for OpenAI, Anthropic, Gemini, and OpenRouter are stored *strictly* in the browser's `localStorage` or `sessionStorage`.
-* **Grounded AI Coaching:** Context-aware prompts ensure the AI tutor coaches the student based solely on lesson parameters and mapped academic sources, rather than generic hallucination.
-
-### 3. Graceful Persistence Layer
-* **Offline First & Cloud Ready:** Features a dual-tiered repository system. Read and write operations flawlessly fall back to `localStorage` when offline or when a backend database isn't provisioned.
-* **Instant Backend Upgrade:** Hooked up to Supabase SDK natively. Pushing the Postgres schema instantly promotes the application to a cloud-synced, multi-tenant app without rewriting a single line of React.
-
-### 4. Course Hydration Engine
-* Includes robust tooling to dynamically hydrate massive Markdown curriculum compendiums directly into strongly-typed TypeScript structures (Phases, Lessons, Quizzes, Rubrics).
+OpenEd is a free AI-native learning platform where courses are source-mapped, tutor-assisted, practice-driven, artifact-based, and proof-producing. It is designed to run completely offline via \`localStorage\` or seamlessly scale to a global cloud backend using Supabase.
 
 ---
 
-## 🏗️ Technical Architecture
+## 🏗️ Architecture & Data Flow
 
-### Tech Stack
-- **Framework:** React 18 & Vite
-- **Routing:** React Router v6
-- **Styling:** Vanilla CSS & Lucide Icons
-- **Persistence:** LocalStorage API + Supabase JS SDK (PostgreSQL)
-- **Tooling:** TypeScript
+Our **BYOK (Bring Your Own Key)** architecture guarantees that LLM inference keys never touch a centralized server. All AI completions are proxied directly from the client's browser to the inference provider (OpenAI, Anthropic, Gemini, OpenRouter), maintaining absolute security.
 
-### Project Structure
+\`\`\`mermaid
+graph TD
+    subgraph Client [Browser Application]
+        UI[React UI Components]
+        Store[BYOK Store<br/>localStorage]
+        Repo[Data Repositories]
+    end
 
-\`\`\`text
-src/
-├── app/          # App shell, routing, and global providers
-├── data/         # Statically hydrated curriculum models
-├── features/     # Feature-sliced components (Auth, Courses, Educator, Learner, Tutor)
-├── lib/          # Database repositories and Supabase initialization
-└── shared/       # Shared UI components and hooks
+    subgraph Course Engine
+        Hydrate[Static Hydration Engine]
+        Data[TypeScript Course Data<br/>Phases, Lessons, Quizzes]
+    end
+
+    subgraph External LLM Providers
+        OAI[OpenAI]
+        Anth[Anthropic]
+        Gem[Gemini]
+        OR[OpenRouter]
+    end
+
+    subgraph Persistence Layer
+        Local[Local Storage Fallback]
+        Supabase[(Supabase PostgreSQL)]
+    end
+
+    UI <--> Repo
+    UI <--> Store
+    Store -.->|API Request| OAI
+    Store -.->|API Request| Anth
+    Store -.->|API Request| Gem
+    Store -.->|API Request| OR
+
+    Repo <--> Local
+    Repo <-->|Optional Sync| Supabase
+    Hydrate --> Data --> UI
 \`\`\`
+
+---
+
+## 🌟 Core Modules
+
+| Module | Description | Technical Implementation |
+| :--- | :--- | :--- |
+| **Educator Studio** | No-code visual editor for curriculum creation. | Nested tab-driven React forms mutating local Zustand stores. |
+| **Proof Engine** | Evaluates student artifacts against strict rubrics. | Dual-tier submission system allowing grading overrides. |
+| **BYOK Tutor** | Grounded AI coaching linked to course content. | Context-aware prompt injection wrapped in an async LLM fetch layer. |
+| **Hydration Engine** | Parses raw markdown into structured datasets. | Custom node pipeline \`scripts/hydrate.js\` converting to static arrays. |
 
 ---
 
 ## 🚀 Getting Started
 
+To spin up OpenEd locally, follow these straightforward steps:
+
 ### Prerequisites
-- Node.js 22.x
-- npm
+Make sure you have Node.js (v22.x recommended) and npm installed.
 
-### Installation
+### 1. Installation
 
-1. **Clone the repository:**
-   \`\`\`bash
-   git clone https://github.com/integ-web/OpenEd.git
-   cd OpenEd
-   \`\`\`
+Clone the repository and install the Vite ecosystem dependencies.
 
-2. **Install dependencies:**
-   \`\`\`bash
-   npm install
-   \`\`\`
+\`\`\`bash
+git clone https://github.com/integ-web/OpenEd.git
+cd OpenEd
+npm install
+\`\`\`
 
-3. **Start the development server:**
-   \`\`\`bash
-   npm run dev
-   \`\`\`
+### 2. Local Development
 
-### Supabase Backend Deployment (Optional)
+Run the frontend server. OpenEd operates perfectly in a decentralized, local-storage-only mode right out of the box.
 
-By default, the application runs perfectly using local browser storage. If you want to enable cloud-sync, true IAM role segregation, and database persistence, deploy the backend schema:
+\`\`\`bash
+npm run dev
+\`\`\`
 
-1. **Link your project:**
-   \`\`\`bash
-   npx supabase link --project-ref <your-project-id>
-   \`\`\`
-2. **Push the schema:**
-   \`\`\`bash
-   npx supabase db push
-   \`\`\`
+### 3. Deploying the Backend (Optional)
+
+If you wish to utilize multi-tenant auth and cloud storage, push the database schema to your Supabase project:
+
+\`\`\`bash
+npx supabase link --project-ref <your-project-id>
+npx supabase db push
+\`\`\`
 
 ---
 
-## 📝 Scripts
+## 📝 Commands
+
+<details>
+<summary><strong>View all available npm scripts</strong></summary>
 
 - \`npm run dev\` - Starts the local development server.
 - \`npm run build\` - Compiles TypeScript and builds the Vite production bundle.
-- \`npm run hydrate\` - Parses the course Markdown compendium and builds the \`src/data\` TypeScript constants.
+- \`npm run hydrate\` - Parses the \`Course_Content_Source_Compendium.md\` and maps it into \`src/data\` TypeScript constants.
+- \`npm run deploy\` - Builds the source and publishes the \`dist/\` folder to the \`gh-pages\` branch.
+
+</details>
 
 ---
 
-## 🤝 Contributing
-OpenEd is driven by the community. We welcome contributions to the Educator Studio, the Assessment Engine, and the core curriculum.
+<div align="center">
+  <p>Built with ❤️ by the OpenEd Community</p>
+</div>
