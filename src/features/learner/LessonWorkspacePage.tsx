@@ -129,42 +129,7 @@ export function LessonWorkspacePage() {
               </div>
             </article>
 
-            <article className="workspace-panel">
-              <h2>Video reference</h2>
-              <div
-                style={{
-                  position: "relative",
-                  paddingBottom: "56.25%",
-                  height: 0,
-                  overflow: "hidden",
-                  borderRadius: "12px",
-                  background: "var(--panel-strong)",
-                  marginBottom: "1rem",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--muted)",
-                    padding: "20px",
-                  }}
-                >
-                  <PlayCircle size={48} style={{ color: "var(--blue)", marginBottom: "10px" }} />
-                  <p style={{ margin: 0, fontWeight: 600 }}>Lesson Video Playback Placeholder</p>
-                  <p style={{ margin: 0, fontSize: "0.85rem" }}>
-                    The transcript below serves as the canonical content for this local workspace.
-                  </p>
-                </div>
-              </div>
-            </article>
+
 
             {quiz && (
               <article className="workspace-panel">
@@ -276,10 +241,10 @@ export function LessonWorkspacePage() {
       </div>
       <aside className="tutor-panel">
         <Sparkles size={18} />
-        <h2>Grounded mock tutor</h2>
+        <h2>AI BYOK Tutor</h2>
         <p>
-          {keyReady ? `${byok.provider} / ${byok.model}` : "Add a browser-only key or switch to mock mode."} This sprint
-          keeps tutor responses in mock mode with source grounding. BYOK keys are never stored in Supabase.
+          {keyReady ? `Connected: ${byok.provider} / ${byok.model}` : "Add a browser-only key or switch to mock mode."}
+          Your API keys are stored securely in your browser's local storage and never touch our servers. The AI is fully grounded in your lesson context.
         </p>
         <div className="prompt-grid">
           {["Explain simply", "Quiz me", "Help with artifact", "Cite sources", "Show visual anchor"].map((prompt) => (

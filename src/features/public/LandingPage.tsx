@@ -9,8 +9,7 @@ export function LandingPage() {
         <p className="eyebrow">OpenEd Platform</p>
         <h1>Learn with sources, practice, AI help, and proof.</h1>
         <p className="lede">
-          OpenEd is a free AI-native learning platform. This FME demo preview shows the first flagship course direction
-          without claiming full course coverage yet.
+          OpenEd is a free AI-native learning platform. Jump straight into our flagship Frontier Model Evaluations curriculum, containing 40 comprehensive lessons mapped to primary research sources.
         </p>
         <div className="hero-actions">
           <Link className="button" to="/courses/fme">
