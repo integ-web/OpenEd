@@ -12,6 +12,8 @@
 
 ---
 
+**🌐 Live Demo:** [https://integ-web.github.io/OpenEd/](https://integ-web.github.io/OpenEd/)
+
 ## 📌 Overview
 **OpenEd** is an advanced, source-backed learning platform. It serves as the primary runtime environment for the **Frontier Model Evaluation** certification course, designed for safety researchers, engineers, and AI practitioners.
 
