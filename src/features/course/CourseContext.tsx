@@ -1,29 +1,29 @@
-﻿import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useNavigate as useRouterNavigate } from 'react-router-dom';
 import { INITIAL_STATE, type CourseState, type ScreenId, type ScreenProps } from './course-types';
 import { useAuth } from "../../app/providers";
 
 export const SCREEN_PATHS: Record<ScreenId, string> = {
-  landing:      '/',
-  onboarding:   '/onboarding',
-  diagnostic:   '/diagnostic',
-  dashboard:    '/course/dashboard',
-  map:          '/course/map',
-  modules:      '/course/modules',
-  module:       '/course/module',
-  lesson:       '/course/lesson',
-  'case-study': '/course/case-study',
-  simulation:   '/course/simulation',
-  quiz:         '/course/quiz',
-  evidence:     '/course/evidence',
-  benchmark:    '/course/benchmark',
-  risk:         '/course/risk',
-  capstone:     '/capstone/brief',
-  portfolio:    '/course/portfolio',
-  certificate:  '/certificate',
-  glossary:     '/course/glossary',
-  sources:      '/course/sources',
-  'content-qa': '/course/content-qa',
+  landing:      '/learn/courses/fme',
+  onboarding:   '/learn/courses/fme/onboarding',
+  diagnostic:   '/learn/courses/fme/diagnostic',
+  dashboard:    '/learn/courses/fme/course/dashboard',
+  map:          '/learn/courses/fme/course/map',
+  modules:      '/learn/courses/fme/course/modules',
+  module:       '/learn/courses/fme/course/module',
+  lesson:       '/learn/courses/fme/course/lesson',
+  'case-study': '/learn/courses/fme/course/case-study',
+  simulation:   '/learn/courses/fme/course/simulation',
+  quiz:         '/learn/courses/fme/course/quiz',
+  evidence:     '/learn/courses/fme/course/evidence',
+  benchmark:    '/learn/courses/fme/course/benchmark',
+  risk:         '/learn/courses/fme/course/risk',
+  capstone:     '/capstone',
+  portfolio:    '/learn/courses/fme/course/portfolio',
+  certificate:  '/learn/courses/fme/certificate',
+  glossary:     '/learn/courses/fme/course/glossary',
+  sources:      '/learn/courses/fme/course/sources',
+  'content-qa': '/learn/courses/fme/course/content-qa',
 };
 
 export const PATH_TO_SCREEN: Record<string, ScreenId> = Object.fromEntries(
