@@ -30,15 +30,38 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-function makeMockUser(email: string): User {
+function makeMockUser(email: string, fullName: string): User {
   return {
     id: "local-dev-user",
     app_metadata: {},
-    user_metadata: {},
+    user_metadata: { full_name: fullName },
     aud: "authenticated",
     created_at: new Date().toISOString(),
     email,
   } as User;
+}
+
+function readMockUsers(): OpenEdProfile[] {
+  const saved = localStorage.getItem("opened.mockUsers");
+  if (saved) {
+    try {
+      return JSON.parse(saved) as OpenEdProfile[];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+}
+
+function saveMockUser(profile: OpenEdProfile) {
+  const users = readMockUsers();
+  const index = users.findIndex(u => u.email.toLowerCase() === profile.email.toLowerCase());
+  if (index >= 0) {
+    users[index] = profile;
+  } else {
+    users.push(profile);
+  }
+  localStorage.setItem("opened.mockUsers", JSON.stringify(users));
 }
 
 function readMockProfile(): OpenEdProfile | null {
@@ -53,6 +76,8 @@ function writeMockProfile(profile: OpenEdProfile) {
   localStorage.setItem("opened.mockProfile", JSON.stringify(profile));
   localStorage.setItem("opened.role", profile.role);
 }
+
+import { CapstoneProvider } from "../features/capstone/CapstoneContext";
 
 export function AppProviders({ children }: PropsWithChildren) {
   const isMockAuth = !supabaseConfigured;
@@ -103,7 +128,7 @@ export function AppProviders({ children }: PropsWithChildren) {
       if (isMockAuth) {
         const mockProfile = readMockProfile();
         if (active && mockProfile) {
-          setUser(makeMockUser(mockProfile.email));
+          setUser(makeMockUser(mockProfile.email, mockProfile.full_name));
           setProfile(mockProfile);
         }
         setLoading(false);
@@ -142,8 +167,9 @@ export function AppProviders({ children }: PropsWithChildren) {
     async (email: string, password: string, fullName = "OpenEd learner") => {
       if (isMockAuth) {
         const nextProfile = { id: "local-dev-user", email, full_name: fullName, role: "learner" as OpenEdRole };
+        saveMockUser(nextProfile);
         writeMockProfile(nextProfile);
-        setUser(makeMockUser(email));
+        setUser(makeMockUser(email, fullName));
         setProfile(nextProfile);
         return;
       }
@@ -167,14 +193,19 @@ export function AppProviders({ children }: PropsWithChildren) {
   const signIn = useCallback(
     async (email: string, password: string) => {
       if (isMockAuth) {
-        const nextProfile = {
-          id: "local-dev-user",
-          email,
-          full_name: "Local OpenEd learner",
-          role: "learner" as OpenEdRole,
-        };
+        const users = readMockUsers();
+        let nextProfile = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+        if (!nextProfile) {
+          nextProfile = {
+            id: "local-dev-user",
+            email,
+            full_name: email.split("@")[0],
+            role: "learner" as OpenEdRole,
+          };
+          saveMockUser(nextProfile);
+        }
         writeMockProfile(nextProfile);
-        setUser(makeMockUser(email));
+        setUser(makeMockUser(email, nextProfile.full_name));
         setProfile(nextProfile);
         return;
       }
@@ -231,6 +262,7 @@ export function AppProviders({ children }: PropsWithChildren) {
       if (!canUseDevRoleSwitcher || !isMockAuth) return;
       if (!profile) return;
       const nextProfile = { ...profile, role };
+      saveMockUser(nextProfile);
       writeMockProfile(nextProfile);
       setProfile(nextProfile);
     },
@@ -270,7 +302,13 @@ export function AppProviders({ children }: PropsWithChildren) {
     ],
   );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      <CapstoneProvider>
+        {children}
+      </CapstoneProvider>
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

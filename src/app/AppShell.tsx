@@ -24,13 +24,14 @@ const roleLabels: Record<OpenEdRole, string> = {
 const nav = [
   { to: "/courses", label: "Courses", icon: BookOpen, roles: ["learner", "educator", "opened_team"] },
   { to: "/learn", label: "Learn", icon: GraduationCap, roles: ["learner", "educator", "opened_team"] },
+  { to: "/capstone", label: "Capstone", icon: GraduationCap, roles: ["learner", "educator", "opened_team"] },
   { to: "/educator", label: "Studio", icon: UserRoundCog, roles: ["educator", "opened_team"] },
   { to: "/team", label: "Team", icon: ShieldCheck, roles: ["opened_team"] },
   { to: "/settings/byok", label: "BYOK", icon: Sparkles, roles: ["learner", "educator", "opened_team"] },
 ] satisfies Array<{ to: string; label: string; icon: typeof BookOpen; roles: OpenEdRole[] }>;
 
 export function AppShell() {
-  const { role, setRole, user, signOut, isMockAuth, canUseDevRoleSwitcher } = useAuth();
+  const { role, setRole, user, profile, signOut, isMockAuth, canUseDevRoleSwitcher } = useAuth();
   const [dark, setDark] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const location = useLocation();
@@ -97,6 +98,12 @@ export function AppShell() {
             >
               {dark ? <SunMedium className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
+            {user && (
+              <div className="flex flex-col text-right mr-1.5 text-xs">
+                <span className="font-semibold text-foreground truncate max-w-[120px]">{profile?.full_name || user.user_metadata?.full_name || ""}</span>
+                <span className="text-muted-foreground text-[10px]">{roleLabels[role]}</span>
+              </div>
+            )}
             {user ? (
               <Button variant="ghost" size="icon" aria-label="Sign out" onClick={() => void signOut()}>
                 <LogOut className="h-5 w-5" />

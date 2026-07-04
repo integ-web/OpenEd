@@ -339,7 +339,7 @@ function checkGates(cs: CapstoneState) {
   const needsRep = ec.filter(c => c.replicationStatus === 'needs_replication').length;
   const benchmarkConcern = ec.filter(c => c.packetId === 'H').length;
   const reviewersPassed = cs.reviewerResults.filter(r => r.passed).length;
-  const riskWithoutEvidence = cs.riskEntries.filter(r => r.level && (r.level as string) !== '' && r.evidenceCardIds.length === 0).length;
+  const riskWithoutEvidence = cs.riskEntries.filter(r => r.level && r.evidenceCardIds.length === 0).length;
   const riskAcceptableWithoutMit = cs.riskEntries.filter(r => r.level === 'acceptable' && !r.mitigationRationale.trim()).length;
 
   return {

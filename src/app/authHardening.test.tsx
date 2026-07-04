@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { AppShell } from "./AppShell";
 import { AppProviders, useAuth, type OpenEdRole } from "./providers";
 import { RoleRoute } from "./router";
@@ -45,6 +45,7 @@ describe("auth hardening", () => {
   });
 
   it("hides the role switcher when the explicit dev flag is absent", async () => {
+    vi.stubEnv("VITE_ENABLE_DEV_ROLE_SWITCHER", "false");
     seedProfile("learner");
 
     render(
@@ -56,6 +57,7 @@ describe("auth hardening", () => {
     );
 
     await waitFor(() => expect(screen.queryByLabelText("Preview role")).not.toBeInTheDocument());
+    vi.unstubAllEnvs();
   });
 
   it("blocks learners from educator routes", async () => {
@@ -96,5 +98,75 @@ describe("auth hardening", () => {
 
     await waitFor(() => expect(screen.getByText("Learner Dashboard")).toBeInTheDocument());
     expect(screen.queryByText("Team Console")).not.toBeInTheDocument();
+  });
+
+  it("persists multiple mock users in localStorage and resolves them on sign in", async () => {
+    localStorage.removeItem("opened.mockUsers");
+    localStorage.removeItem("opened.mockProfile");
+
+    function AuthTestComponent() {
+      const { signUp, signIn, profile, signOut } = useAuth();
+      return (
+        <div>
+          <output aria-label="name">{profile?.full_name ?? "No Name"}</output>
+          <output aria-label="role">{profile?.role ?? "No Role"}</output>
+          <button type="button" onClick={() => void signUp("jane@example.com", "password", "Jane Doe")}>
+            Sign up Jane
+          </button>
+          <button type="button" onClick={() => void signIn("jane@example.com", "password")}>
+            Sign in Jane
+          </button>
+          <button type="button" onClick={() => void signIn("john@example.com", "password")}>
+            Sign in John
+          </button>
+          <button type="button" onClick={() => void signOut()}>
+            Sign out
+          </button>
+        </div>
+      );
+    }
+
+    render(
+      <AppProviders>
+        <AuthTestComponent />
+      </AppProviders>,
+    );
+
+    expect(screen.getByLabelText("name")).toHaveTextContent("No Name");
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign up Jane" }));
+    await waitFor(() => expect(screen.getByLabelText("name")).toHaveTextContent("Jane Doe"));
+    expect(screen.getByLabelText("role")).toHaveTextContent("learner");
+
+    const usersList = JSON.parse(localStorage.getItem("opened.mockUsers") ?? "[]");
+    expect(usersList).toContainEqual(
+      expect.objectContaining({
+        email: "jane@example.com",
+        full_name: "Jane Doe",
+        role: "learner",
+      })
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    await waitFor(() => expect(screen.getByLabelText("name")).toHaveTextContent("No Name"));
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign in John" }));
+    await waitFor(() => expect(screen.getByLabelText("name")).toHaveTextContent("john"));
+    expect(screen.getByLabelText("role")).toHaveTextContent("learner");
+
+    const updatedUsersList = JSON.parse(localStorage.getItem("opened.mockUsers") ?? "[]");
+    expect(updatedUsersList).toContainEqual(
+      expect.objectContaining({
+        email: "john@example.com",
+        full_name: "john",
+        role: "learner",
+      })
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign out" }));
+    await waitFor(() => expect(screen.getByLabelText("name")).toHaveTextContent("No Name"));
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign in Jane" }));
+    await waitFor(() => expect(screen.getByLabelText("name")).toHaveTextContent("Jane Doe"));
   });
 });

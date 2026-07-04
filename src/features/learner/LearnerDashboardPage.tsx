@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, FolderCheck, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, FolderCheck, Sparkles, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { fmeCourse, getFmeLesson } from "../../data/fme";
 import { useFmeProgress } from "./useFmeProgress";
@@ -37,6 +37,14 @@ export function LearnerDashboardPage() {
           <FolderCheck size={20} />
           <h2>Portfolio</h2>
           <p>SkillProof items appear after artifact review.</p>
+        </article>
+        <article className="mini-card">
+          <GraduationCap size={20} />
+          <h2>Capstone Studio</h2>
+          <p>Assemble phase artifacts into a pre-deployment dossier for Aster-3.</p>
+          <Link className="button secondary" style={{ marginTop: "auto", display: "inline-flex", width: "fit-content" }} to="/capstone/brief">
+            Open Capstone <ArrowRight size={14} />
+          </Link>
         </article>
       </div>
     </section>

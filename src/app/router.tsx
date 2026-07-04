@@ -22,6 +22,7 @@ import { TeamDashboardPage } from "../features/team/TeamDashboardPage";
 import { TeamReviewQueuePage } from "../features/team/TeamReviewQueuePage";
 import { NotFoundPage } from "../features/public/NotFoundPage";
 import { sanitizeRedirectTarget } from "../shared/utils/authRedirects";
+import { CapstoneStudio } from "../features/capstone/CapstoneStudio";
 
 export function ProtectedRoute() {
   const { isAuthenticated, loading } = useAuth();
@@ -76,6 +77,8 @@ export const router = createBrowserRouter([
               { path: "/learn/courses/fme/lesson/:lessonId", element: <LessonWorkspacePage /> },
               { path: "/learn/portfolio", element: <PortfolioPage /> },
               { path: "/settings/byok", element: <ByokSettingsPage /> },
+              { path: "/capstone", element: <CapstoneStudio /> },
+              { path: "/capstone/:section", element: <CapstoneStudio /> },
             ],
           },
           {
