@@ -19,13 +19,18 @@ export const providerModels: Record<TutorProvider, string[]> = {
 };
 
 export function saveBrowserKey(keyValue: string, mode: ByokStorageMode) {
+  const existingKey = getBrowserKey();
+  const keyToSave = keyValue || existingKey;
+
   sessionStorage.removeItem(sessionKey);
   localStorage.removeItem(localKey);
-  if (!keyValue) return;
+  
+  if (!keyToSave) return;
+  
   if (mode === "session") {
-    sessionStorage.setItem(sessionKey, keyValue);
+    sessionStorage.setItem(sessionKey, keyToSave);
   } else {
-    localStorage.setItem(localKey, keyValue);
+    localStorage.setItem(localKey, keyToSave);
   }
   window.dispatchEvent(new Event("opened-byok"));
 }

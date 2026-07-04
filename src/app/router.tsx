@@ -23,6 +23,7 @@ import { TeamReviewQueuePage } from "../features/team/TeamReviewQueuePage";
 import { NotFoundPage } from "../features/public/NotFoundPage";
 import { sanitizeRedirectTarget } from "../shared/utils/authRedirects";
 import { CapstoneStudio } from "../features/capstone/CapstoneStudio";
+import { CapstoneProvider } from "../features/capstone/CapstoneContext";
 import { C } from "../features/fme/types";
 
 // FME Screens
@@ -157,8 +158,8 @@ export const router = createBrowserRouter([
               { path: "/learn", element: <LearnerDashboardPage /> },
               { path: "/learn/portfolio", element: <PortfolioPage /> },
               { path: "/settings/byok", element: <ByokSettingsPage /> },
-              { path: "/capstone", element: <CapstoneStudio /> },
-              { path: "/capstone/:section", element: <CapstoneStudio /> },
+              { path: "/capstone", element: <CapstoneProvider><CapstoneStudio /></CapstoneProvider> },
+              { path: "/capstone/:section", element: <CapstoneProvider><CapstoneStudio /></CapstoneProvider> },
             ],
           },
           {
