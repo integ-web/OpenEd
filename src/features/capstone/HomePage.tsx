@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const DELIVERABLES = [
   { code: "D-01", label: "Threat Model", desc: "≥3 risk domains, adversarial register" },

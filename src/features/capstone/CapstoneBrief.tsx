@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { SectionHeader, Card, Btn, InfoBox } from "./ui";
 
 export function CapstoneBrief() {

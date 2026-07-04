@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCapstone } from "./CapstoneContext";
 import { CapstoneBrief } from "./CapstoneBrief";
 import { ModelProfile } from "./ModelProfile";
