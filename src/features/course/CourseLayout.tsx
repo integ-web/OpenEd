@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate as useRouterNavigate } from 'react-router-dom';
 import {
   Shield, Moon, Sun, LayoutDashboard, Map, BookOpen,
@@ -8,7 +8,7 @@ import {
 import { C, fonts, shadow } from '../fme/types';
 import { MODULES, TOTAL_HOURS, type ScreenId, type PhaseId } from './course-types';
 import { useCourse, PATH_TO_SCREEN } from './CourseContext';
-import { useAuth } from '../../app/providers';
+import { useAuth } from "../../app/providers";
 
 function useActiveScreen(): ScreenId | null {
   const { pathname } = useLocation();
@@ -19,7 +19,7 @@ function useActiveScreen(): ScreenId | null {
   return null;
 }
 
-// ── User Profile Dropdown ──────────────────────────────────────────────────────
+// â”€â”€ User Profile Dropdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function UserProfileMenu({ dark }: { dark: boolean }) {
   const { user, signOut } = useAuth();
   const { navigate } = useCourse();
@@ -127,7 +127,7 @@ function UserProfileMenu({ dark }: { dark: boolean }) {
   );
 }
 
-// ── Top Nav ───────────────────────────────────────────────────────────────────
+// â”€â”€ Top Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function TopNav() {
   const { state, update, navigate } = useCourse();
   const c = C(state.dark);
@@ -169,12 +169,12 @@ function TopNav() {
             style={{ fontFamily: fonts.sans, fontSize: 13, color: c.textTertiary, cursor: 'pointer', flexShrink: 0 }}
             onClick={() => navigate('modules')}
           >
-            Phase {currentPhase.id.slice(1)} · {currentPhase.title}
+            Phase {currentPhase.id.slice(1)} Â· {currentPhase.title}
           </span>
         )}
         {active === 'lesson' && currentPhase && (
           <>
-            <span style={{ color: c.textTertiary }}>›</span>
+            <span style={{ color: c.textTertiary }}>â€º</span>
             <span style={{ fontFamily: fonts.sans, fontSize: 13, fontWeight: 500, color: c.textPrimary, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {crumbTitle}
             </span>
@@ -207,7 +207,7 @@ function TopNav() {
   );
 }
 
-// ── Expandable Left Rail ───────────────────────────────────────────────────────
+// â”€â”€ Expandable Left Rail â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function LeftRail() {
   const { state, navigate } = useCourse();
   const routerNav = useRouterNavigate();
@@ -301,14 +301,14 @@ function LeftRail() {
       <div style={{ height: 1, background: c.border, margin: '8px 0', flexShrink: 0 }} />
       {tools.map(item => btn(item.id, item.label, item.icon, () => navigate(item.id)))}
       <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {btn('capstone', 'Capstone Studio ↗', <GraduationCap size={18} />, () => routerNav('/capstone/brief'))}
+        {btn('capstone', 'Capstone Studio â†—', <GraduationCap size={18} />, () => routerNav('/capstone/brief'))}
         {btn('profile', state.learnerName, <User size={18} />, () => {})}
       </div>
     </aside>
   );
 }
 
-// ── Shell ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function CourseLayout() {
   const { state } = useCourse();
   const c = C(state.dark);
@@ -322,3 +322,4 @@ export function CourseLayout() {
     </div>
   );
 }
+

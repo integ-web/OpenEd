@@ -12,8 +12,8 @@ import { CourseCreationPage } from "../features/educator/CourseCreationPage";
 import { EducatorDashboardPage } from "../features/educator/EducatorDashboardPage";
 import { EducatorReviewStatusPage } from "../features/educator/EducatorReviewStatusPage";
 import { LearnerDashboardPage } from "../features/learner/LearnerDashboardPage";
-import { LearnerFmeCoursePage } from "../features/learner/LearnerFmeCoursePage";
-import { LessonWorkspacePage } from "../features/learner/LessonWorkspacePage";
+import { CourseLayout } from "../features/course/CourseLayout";
+import { CourseProvider } from "../features/course/CourseContext";
 import { PortfolioPage } from "../features/portfolio/PortfolioPage";
 import { ProofReviewPage } from "../features/proof/ProofReviewPage";
 import { LandingPage } from "../features/public/LandingPage";
@@ -56,6 +56,25 @@ export function RoleRoute({ allowed }: { allowed: OpenEdRole[] }) {
 
 export const router = createBrowserRouter([
   {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/learn/courses/fme",
+        element: <RoleRoute allowed={["learner", "educator", "opened_team"]} />,
+        children: [
+          {
+            path: "",
+            element: (
+              <CourseProvider>
+                <CourseLayout />
+              </CourseProvider>
+            ),
+          }
+        ],
+      },
+    ],
+  },
+  {
     element: <AppShell />,
     children: [
       { path: "/", element: <LandingPage /> },
@@ -73,8 +92,6 @@ export const router = createBrowserRouter([
             element: <RoleRoute allowed={["learner", "educator", "opened_team"]} />,
             children: [
               { path: "/learn", element: <LearnerDashboardPage /> },
-              { path: "/learn/courses/fme", element: <LearnerFmeCoursePage /> },
-              { path: "/learn/courses/fme/lesson/:lessonId", element: <LessonWorkspacePage /> },
               { path: "/learn/portfolio", element: <PortfolioPage /> },
               { path: "/settings/byok", element: <ByokSettingsPage /> },
               { path: "/capstone", element: <CapstoneStudio /> },

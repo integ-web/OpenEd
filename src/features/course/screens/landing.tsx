@@ -1,7 +1,7 @@
-import { Shield, ArrowRight, Play, BookOpen, Sparkles, Target } from 'lucide-react';
+﻿import { Shield, ArrowRight, Play, BookOpen, Sparkles, Target } from 'lucide-react';
 import { C, fonts, shadow } from '../../fme/types';
 import { MODULES, type ScreenProps } from '../course-types';
-import { useAuth } from '../../../app/providers';
+import { useAuth } from "../../../app/providers";
 
 const PERSONAS = [
   { role: 'Safety Researcher', desc: 'You study capability profiles and design elicitation protocols. This course gives you the evaluation workflow and evidence language to produce defensible findings.' },
@@ -12,9 +12,9 @@ const PERSONAS = [
 
 const PROMISES = [
   { icon: <Play size={16} />, color: '#2563EB', bg: '#EFF6FF', bdr: '#BFDBFE', label: 'Video-first learning', desc: 'Every lesson anchors on a video, with structured tabs for understanding, practice, and building.' },
-  { icon: <Target size={16} />, color: '#0F766E', bg: '#CCFBF1', bdr: '#99F6E4', label: 'Artifact portfolio', desc: 'Each phase produces a portfolio-ready artifact — evaluation rubrics, harnesses, red-team reports.' },
+  { icon: <Target size={16} />, color: '#0F766E', bg: '#CCFBF1', bdr: '#99F6E4', label: 'Artifact portfolio', desc: 'Each phase produces a portfolio-ready artifact â€” evaluation rubrics, harnesses, red-team reports.' },
   { icon: <Sparkles size={16} />, color: '#6D28D9', bg: '#F5F3FF', bdr: '#DDD6FE', label: 'AI Coach', desc: 'An in-lesson AI Coach helps you clarify concepts, fill artifacts, and connect lessons to the capstone.' },
-  { icon: <BookOpen size={16} />, color: '#B45309', bg: '#FFFBEB', bdr: '#FDE68A', label: 'Source-backed', desc: 'Every lesson cites real papers, frameworks, and tools — no invented citations or vague claims.' },
+  { icon: <BookOpen size={16} />, color: '#B45309', bg: '#FFFBEB', bdr: '#FDE68A', label: 'Source-backed', desc: 'Every lesson cites real papers, frameworks, and tools â€” no invented citations or vague claims.' },
 ];
 
 export function LandingScreen({ state, navigate }: ScreenProps) {
@@ -173,7 +173,7 @@ export function LandingScreen({ state, navigate }: ScreenProps) {
                   Start learning <ArrowRight size={15} />
                 </a>
                 <button onClick={() => navigate('diagnostic')} style={{ background: 'transparent', color: c.textSecondary, border: `1px solid ${c.border}`, padding: '14px 24px', borderRadius: 8, fontSize: 14, cursor: 'pointer', fontFamily: fonts.sans }}>
-                  I have experience — take the diagnostic
+                  I have experience â€” take the diagnostic
                 </button>
               </>
             )}
@@ -184,3 +184,4 @@ export function LandingScreen({ state, navigate }: ScreenProps) {
     </div>
   );
 }
+

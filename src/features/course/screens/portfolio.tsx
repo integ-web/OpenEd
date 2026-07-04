@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { C, fonts, shadow } from '../../fme/types';
 import { type ScreenProps, MODULES } from '../course-types';
 import { CheckCircle, XCircle, Award, Download, ExternalLink } from 'lucide-react';
@@ -25,7 +25,7 @@ export function PortfolioScreen({ state, navigate, update }: ScreenProps) {
 
   const CHECKLIST = [
     ...MODULES.map(m => ({ label: `Module ${m.id}: ${m.title}`, done: state.completedModules.includes(m.id) })),
-    { label: `Evidence Library: ${state.evidenceCards.length} cards (need ≥ 3)`, done: evidenceOk },
+    { label: `Evidence Library: ${state.evidenceCards.length} cards (need â‰¥ 3)`, done: evidenceOk },
     { label: `Benchmark Packet built (${state.benchmarks.length} benchmark${state.benchmarks.length !== 1 ? 's' : ''})`, done: benchmarkOk },
     { label: 'Risk Dashboard generated', done: riskDone },
     { label: 'Capstone dossier submitted', done: capstoneDone },
@@ -38,12 +38,12 @@ export function PortfolioScreen({ state, navigate, update }: ScreenProps) {
 
   // Artifact cards
   const artifacts = [
-    { label: 'Frontier AI Landscape Map',  module: 'A', nav: 'map' as const,       done: state.completedModules.includes('' as any),           desc: 'Visual map of frontier models, capability profiles, and evaluation institutions.' },
-    { label: 'Threat Model Document',       module: 'B', nav: 'modules' as const,   done: state.completedModules.includes('' as any),           desc: 'Formal threat model covering actors, pathways, assumptions, and consequence severity.' },
-    { label: 'Evaluation Design Document',  module: 'C', nav: 'modules' as const,   done: state.completedModules.includes('' as any),           desc: 'Evaluation objectives, elicitation protocol, metrics, and validity analysis.' },
+    { label: 'Frontier AI Landscape Map',  module: 'P1', nav: 'map' as const,       done: state.completedModules.includes('P1'),           desc: 'Visual map of frontier models, capability profiles, and evaluation institutions.' },
+    { label: 'Threat Model Document',       module: 'P2', nav: 'modules' as const,   done: state.completedModules.includes('P2'),           desc: 'Formal threat model covering actors, pathways, assumptions, and consequence severity.' },
+    { label: 'Evaluation Design Document',  module: 'P3', nav: 'modules' as const,   done: state.completedModules.includes('P3'),           desc: 'Evaluation objectives, elicitation protocol, metrics, and validity analysis.' },
     { label: 'Benchmark Packet',            module: 'D', nav: 'benchmark' as const, done: state.benchmarks.length >= 1,                  desc: `${state.benchmarks.length} benchmark${state.benchmarks.length !== 1 ? 's' : ''} with validity analysis and scoring rubrics.` },
-    { label: `Evidence Log (${state.evidenceCards.length} cards)`, module: 'H', nav: 'evidence' as const, done: state.evidenceCards.length >= 1, desc: 'Structured evidence records from elicitation exercises and case studies.' },
-    { label: 'Red Team Report',             module: 'H', nav: 'modules' as const,   done: state.completedModules.includes('' as any),           desc: state.completedModules.includes('' as any) ? 'Red team program design, findings log, and escalation decisions.' : 'Complete Module H to generate this artifact.' },
+    { label: `Evidence Log (${state.evidenceCards.length} cards)`, module: 'P4', nav: 'evidence' as const, done: state.evidenceCards.length >= 1, desc: 'Structured evidence records from elicitation exercises and case studies.' },
+    { label: 'Red Team Report',             module: 'P4', nav: 'modules' as const,   done: state.completedModules.includes('P4'),           desc: state.completedModules.includes('P4') ? 'Red team program design, findings log, and escalation decisions.' : 'Complete Module H to generate this artifact.' },
     { label: 'Risk Dashboard',              module: 'I', nav: 'risk' as const,      done: riskDone,                                       desc: riskDone ? 'Risk matrix, finding set, and deployment recommendation.' : 'Build the risk dashboard to include this artifact.' },
     { label: 'Executive Report',            module: 'I', nav: 'capstone' as const,  done: capstoneDone,                                   desc: capstoneDone ? 'Leadership-ready evaluation summary from your capstone dossier.' : 'Submit your capstone dossier to generate this artifact.' },
   ];
@@ -61,9 +61,9 @@ export function PortfolioScreen({ state, navigate, update }: ScreenProps) {
       <div style={{ maxWidth: 960, margin: '0 auto', padding: '36px 24px 60px' }}>
         {/* Header */}
         <div style={{ marginBottom: 32 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', color: c.textTertiary, textTransform: 'uppercase', marginBottom: 8 }}>Frontier Model Evaluation · Final Review</div>
+          <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', color: c.textTertiary, textTransform: 'uppercase', marginBottom: 8 }}>Frontier Model Evaluation Â· Final Review</div>
           <h1 style={{ margin: '0 0 6px', fontSize: 30, fontWeight: 700, fontFamily: fonts.serif }}>Your Evaluation Portfolio</h1>
-          <p style={{ margin: 0, fontSize: 15, color: c.textSecondary }}>{state.learnerName} · Safety Researcher Track</p>
+          <p style={{ margin: 0, fontSize: 15, color: c.textSecondary }}>{state.learnerName} Â· Safety Researcher Track</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: 28, alignItems: 'start' }}>
@@ -139,7 +139,7 @@ export function PortfolioScreen({ state, navigate, update }: ScreenProps) {
             {/* CTA */}
             <div style={{ background: c.surface, borderRadius: 12, border: `1px solid ${c.border}`, padding: 24, boxShadow: shadow.sm }}>
               <div style={{ fontWeight: 700, fontSize: 16, fontFamily: fonts.serif, marginBottom: 8 }}>
-                {allMet ? 'All criteria met — ready for certification.' : partial ? 'Partial completion available.' : 'Complete more criteria to unlock your certificate.'}
+                {allMet ? 'All criteria met â€” ready for certification.' : partial ? 'Partial completion available.' : 'Complete more criteria to unlock your certificate.'}
               </div>
               <p style={{ fontSize: 13, color: c.textSecondary, margin: '0 0 18px' }}>
                 {allMet
@@ -169,3 +169,6 @@ export function PortfolioScreen({ state, navigate, update }: ScreenProps) {
     </div>
   );
 }
+
+
+

@@ -1,29 +1,29 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+﻿import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { useNavigate as useRouterNavigate } from 'react-router-dom';
 import { INITIAL_STATE, type CourseState, type ScreenId, type ScreenProps } from './course-types';
-import { useAuth } from '../../app/providers';
+import { useAuth } from "../../app/providers";
 
 export const SCREEN_PATHS: Record<ScreenId, string> = {
   landing:      '/',
   onboarding:   '/onboarding',
   diagnostic:   '/diagnostic',
-  dashboard:    '/learn/dashboard',
-  map:          '/learn/map',
-  modules:      '/learn/modules',
-  module:       '/learn/module',
-  lesson:       '/learn/lesson',
-  'case-study': '/learn/case-study',
-  simulation:   '/learn/simulation',
-  quiz:         '/learn/quiz',
-  evidence:     '/learn/evidence',
-  benchmark:    '/learn/benchmark',
-  risk:         '/learn/risk',
+  dashboard:    '/course/dashboard',
+  map:          '/course/map',
+  modules:      '/course/modules',
+  module:       '/course/module',
+  lesson:       '/course/lesson',
+  'case-study': '/course/case-study',
+  simulation:   '/course/simulation',
+  quiz:         '/course/quiz',
+  evidence:     '/course/evidence',
+  benchmark:    '/course/benchmark',
+  risk:         '/course/risk',
   capstone:     '/capstone/brief',
-  portfolio:    '/learn/portfolio',
+  portfolio:    '/course/portfolio',
   certificate:  '/certificate',
-  glossary:     '/learn/glossary',
-  sources:      '/learn/sources',
-  'content-qa': '/learn/content-qa',
+  glossary:     '/course/glossary',
+  sources:      '/course/sources',
+  'content-qa': '/course/content-qa',
 };
 
 export const PATH_TO_SCREEN: Record<string, ScreenId> = Object.fromEntries(
@@ -82,3 +82,4 @@ export function useCourse(): CourseContextValue {
   if (!ctx) throw new Error('useCourse must be used inside CourseProvider');
   return ctx;
 }
+
