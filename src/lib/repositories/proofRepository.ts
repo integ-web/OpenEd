@@ -1,4 +1,4 @@
-
+import { getArtifactForLesson, getRubricForArtifact } from "../../data/fme";
 import type { ArtifactSubmission, PortfolioProofItem } from "../../features/proof/proofStore";
 import { supabase, supabaseConfigured } from "../supabase/client";
 import { readLocalArray, writeLocal } from "./localFallback";
@@ -43,7 +43,7 @@ export const proofRepository = {
   },
 
   async submit(userId: string | undefined, lessonId: string, body: string) {
-    const artifact = { id: lessonId, title: "Artifact" };
+    const artifact = getArtifactForLesson(lessonId);
     if (!artifact) return;
 
     const submissions = await this.listSubmissions(userId);
@@ -78,7 +78,7 @@ export const proofRepository = {
     const submission = submissions.find((item) => item.id === submissionId);
     if (!submission) return;
 
-    const rubric = { criteria: [{id: "c1", label: "Criterion 1", maxScore: 5}] };
+    const rubric = getRubricForArtifact(submission.artifactId);
     const scores =
       rubric?.criteria.map((criterion, index) => ({
         criterionId: criterion.id,

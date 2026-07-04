@@ -1,6 +1,6 @@
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import { Link } from "react-router-dom";
-const fmeCourse = { eyebrow: "Course", title: "Frontier Model Evaluation", promise: "Master AI evaluation", hours: 51, lessons: 40 };
+import { fmeCourse } from "../../data/fme";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 

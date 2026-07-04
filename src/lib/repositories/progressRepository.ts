@@ -1,6 +1,6 @@
 import { supabase, supabaseConfigured } from "../supabase/client";
 import { readLocal, writeLocal } from "./localFallback";
-
+import { getFmeLessonByUuid, fmeLessons } from "../../data/fme/lessons";
 
 export type LessonProgress = {
   enrolled: boolean;
@@ -35,7 +35,7 @@ export const progressRepository = {
     return data.reduce<LessonProgress>(
       (acc, row) => {
         // Reverse lookup the string ID from the UUID if possible
-        const lesson = { id: String(row.lesson_id) };
+        const lesson = getFmeLessonByUuid(String(row.lesson_id));
         const lessonId = lesson ? lesson.id : String(row.lesson_id);
         
         if (row.completed) acc.completedLessons.push(lessonId);
@@ -64,7 +64,7 @@ export const progressRepository = {
     ]);
 
     for (const id of allLessonIds) {
-      const lesson = { uuid: id };
+      const lesson = fmeLessons.find(l => l.id === id);
       if (lesson) {
         rows.push({
           user_id: userId,

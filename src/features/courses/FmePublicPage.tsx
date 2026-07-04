@@ -1,18 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { fmeCourse, fmeModules } from "../../data/fme";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { Progress } from "../../components/ui/progress";
-
-const fmeCourse = { eyebrow: "Course", title: "Frontier Model Evaluation", promise: "Master AI evaluation", hours: 51, lessons: 40 };
-const fmeModules = [
-  { id: "p1", title: "The Paradigm" },
-  { id: "p2", title: "Harness Engineering" },
-  { id: "p3", title: "Golden Datasets" },
-  { id: "p4", title: "Threat Modeling" },
-  { id: "p5", title: "Protocol Design" },
-  { id: "p6", title: "Capstone" }
-];
 
 export function FmePublicPage() {
   return (
@@ -27,7 +18,7 @@ export function FmePublicPage() {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Button asChild size="lg" className="w-full sm:w-auto">
-              <Link to="/learn">
+              <Link to="/learn/courses/fme">
                 Start learning <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
