@@ -1,9 +1,9 @@
-﻿import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate as useRouterNavigate } from 'react-router-dom';
 import {
   Shield, Moon, Sun, LayoutDashboard, Map, BookOpen,
   FileText, Package, BarChart3, GraduationCap,
-  Library, FlaskConical, User, ClipboardCheck, LogOut, Settings, TrendingUp, ChevronDown,
+  Library, FlaskConical, User, ClipboardCheck, LogOut, Settings, TrendingUp, ChevronDown, Menu, X
 } from 'lucide-react';
 import { C, fonts, shadow } from '../fme/types';
 import { MODULES, TOTAL_HOURS, type ScreenId, type PhaseId } from './course-types';
@@ -127,8 +127,8 @@ function UserProfileMenu({ dark }: { dark: boolean }) {
   );
 }
 
-// â”€â”€ Top Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function TopNav() {
+// ─── Top Nav ───────────────────────────────────────────────────────────────────
+function TopNav({ onToggleMenu, menuOpen }: { onToggleMenu: () => void, menuOpen: boolean }) {
   const { state, update, navigate } = useCourse();
   const c = C(state.dark);
   const pct = Math.round((state.hoursCompleted / TOTAL_HOURS) * 100);
@@ -143,38 +143,46 @@ function TopNav() {
       : 'Course';
 
   return (
-    <header style={{
+    <header className="px-3 md:px-6" style={{
       height: 64, flexShrink: 0,
       background: c.surface, borderBottom: `1px solid ${c.border}`,
-      display: 'flex', alignItems: 'center',
-      padding: '0 24px', gap: 20,
+      display: 'flex', alignItems: 'center', gap: 20,
       zIndex: 50, position: 'relative',
     }}>
+      {/* Mobile Menu Toggle */}
+      <button 
+        className="md:hidden flex items-center justify-center cursor-pointer p-1"
+        onClick={onToggleMenu}
+        style={{ color: c.textPrimary, background: 'transparent', border: 'none' }}
+      >
+        {menuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
       {/* Logo */}
-      <div onClick={() => navigate('dashboard')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', flexShrink: 0 }}>
+      <div onClick={() => navigate('dashboard')} className="flex-1 md:flex-none" style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
         <div style={{ width: 32, height: 32, background: '#2563EB', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(37,99,235,0.3)' }}>
           <Shield size={15} color="#fff" />
         </div>
-        <span style={{ fontFamily: fonts.display, fontSize: 14, fontWeight: 700, color: blue, letterSpacing: '-0.01em' }}>
+        <span className="hidden sm:inline" style={{ fontFamily: fonts.display, fontSize: 14, fontWeight: 700, color: blue, letterSpacing: '-0.01em' }}>
           Frontier Evaluation Lab
         </span>
       </div>
 
-      <div style={{ width: 1, height: 24, background: c.border, flexShrink: 0 }} />
+      <div className="hidden md:block" style={{ width: 1, height: 24, background: c.border, flexShrink: 0 }} />
 
       {/* Breadcrumb */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1, minWidth: 0 }}>
+      <div className="hidden md:flex" style={{ alignItems: 'center', gap: 6, flex: 1, minWidth: 0 }}>
         {currentPhase && (
           <span
             style={{ fontFamily: fonts.sans, fontSize: 13, color: c.textTertiary, cursor: 'pointer', flexShrink: 0 }}
             onClick={() => navigate('modules')}
           >
-            Phase {currentPhase.id.slice(1)} Â· {currentPhase.title}
+            Phase {currentPhase.id.slice(1)} · {currentPhase.title}
           </span>
         )}
         {active === 'lesson' && currentPhase && (
           <>
-            <span style={{ color: c.textTertiary }}>â€º</span>
+            <span style={{ color: c.textTertiary }}>›</span>
             <span style={{ fontFamily: fonts.sans, fontSize: 13, fontWeight: 500, color: c.textPrimary, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {crumbTitle}
             </span>
@@ -183,7 +191,7 @@ function TopNav() {
       </div>
 
       {/* Progress bar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+      <div className="hidden lg:flex" style={{ alignItems: 'center', gap: 10, flexShrink: 0 }}>
         <div style={{ width: 140, height: 4, background: c.elevated, borderRadius: 999 }}>
           <div style={{ height: 4, width: `${pct}%`, background: blue, borderRadius: 999 }} />
         </div>
@@ -207,8 +215,8 @@ function TopNav() {
   );
 }
 
-// â”€â”€ Expandable Left Rail â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function LeftRail() {
+// ─── Expandable Left Rail ──────────────────────────────────────────────────────
+function LeftRail({ mobileOpen, setMobileOpen }: { mobileOpen: boolean, setMobileOpen: (v: boolean) => void }) {
   const { state, navigate } = useCourse();
   const routerNav = useRouterNavigate();
   const c = C(state.dark);
@@ -241,15 +249,15 @@ function LeftRail() {
     return (
       <button
         key={id}
-        onClick={onClick}
+        onClick={() => { onClick(); setMobileOpen(false); }}
         onMouseEnter={() => setHov(id)}
         onMouseLeave={() => setHov(null)}
-        title={expanded ? undefined : label}
+        title={expanded || mobileOpen ? undefined : label}
         style={{
           width: '100%', height: 44,
           display: 'flex', alignItems: 'center',
-          justifyContent: expanded ? 'flex-start' : 'center',
-          gap: 10, paddingLeft: expanded ? 14 : 0, paddingRight: expanded ? 14 : 0,
+          justifyContent: expanded || mobileOpen ? 'flex-start' : 'center',
+          gap: 10, paddingLeft: expanded || mobileOpen ? 14 : 0, paddingRight: expanded || mobileOpen ? 14 : 0,
           borderRadius: 10, border: 'none', cursor: 'pointer',
           color: isActive ? blue : isHov ? c.textSecondary : c.textTertiary,
           background: isActive
@@ -270,7 +278,7 @@ function LeftRail() {
           }} />
         )}
         <span style={{ flexShrink: 0, display: 'flex' }}>{icon}</span>
-        {expanded && (
+        {(expanded || mobileOpen) && (
           <span style={{
             fontFamily: fonts.sans, fontSize: 13, fontWeight: isActive ? 600 : 500,
             overflow: 'hidden', textOverflow: 'ellipsis',
@@ -283,40 +291,52 @@ function LeftRail() {
   };
 
   return (
-    <aside
-      onMouseEnter={() => setExpanded(true)}
-      onMouseLeave={() => { setExpanded(false); setHov(null); }}
-      style={{
-        width: expanded ? 200 : 72, flexShrink: 0,
-        background: c.surface, boxShadow: `inset -1px 0 0 ${c.border}`,
-        display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-        padding: expanded ? '16px 12px' : '16px 14px',
-        gap: 2,
-        overflowY: 'auto', overflowX: 'hidden',
-        transition: 'width 0.18s ease, padding 0.18s ease',
-        zIndex: 40,
-      }}
-    >
-      {primary.map(item => btn(item.id, item.label, item.icon, () => navigate(item.id)))}
-      <div style={{ height: 1, background: c.border, margin: '8px 0', flexShrink: 0 }} />
-      {tools.map(item => btn(item.id, item.label, item.icon, () => navigate(item.id)))}
-      <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {btn('capstone', 'Capstone Studio â†—', <GraduationCap size={18} />, () => routerNav('/capstone/brief'))}
-        {btn('profile', state.learnerName, <User size={18} />, () => {})}
-      </div>
-    </aside>
+    <>
+      {mobileOpen && (
+        <div 
+          className="md:hidden" 
+          style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 30 }} 
+          onClick={() => setMobileOpen(false)} 
+        />
+      )}
+      <aside
+        className={`md:flex ${mobileOpen ? 'flex' : 'hidden'}`}
+        onMouseEnter={() => setExpanded(true)}
+        onMouseLeave={() => { setExpanded(false); setHov(null); }}
+        style={{
+          width: expanded || mobileOpen ? 200 : 72, flexShrink: 0,
+          position: mobileOpen ? 'absolute' : 'relative', height: '100%',
+          background: c.surface, boxShadow: `inset -1px 0 0 ${c.border}`,
+          flexDirection: 'column', alignItems: 'stretch',
+          padding: expanded || mobileOpen ? '16px 12px' : '16px 14px',
+          gap: 2,
+          overflowY: 'auto', overflowX: 'hidden',
+          transition: 'width 0.18s ease, padding 0.18s ease',
+          zIndex: 40,
+        }}
+      >
+        {primary.map(item => btn(item.id, item.label, item.icon, () => navigate(item.id)))}
+        <div style={{ height: 1, background: c.border, margin: '8px 0', flexShrink: 0 }} />
+        {tools.map(item => btn(item.id, item.label, item.icon, () => navigate(item.id)))}
+        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {btn('capstone', 'Capstone Studio ↗', <GraduationCap size={18} />, () => routerNav('/capstone/brief'))}
+          {btn('profile', state.learnerName, <User size={18} />, () => {})}
+        </div>
+      </aside>
+    </>
   );
 }
 
-// â”€â”€ Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Shell ───────────────────────────────────────────────────────────────────
 export function CourseLayout() {
   const { state } = useCourse();
   const c = C(state.dark);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: c.bg }}>
-      <TopNav />
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        <LeftRail />
+      <TopNav onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} menuOpen={mobileMenuOpen} />
+      <div style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
+        <LeftRail mobileOpen={mobileMenuOpen} setMobileOpen={setMobileMenuOpen} />
         <main style={{ flex: 1, overflowY: 'auto' }}><Outlet /></main>
       </div>
     </div>
