@@ -2,6 +2,7 @@ import type { Session, User } from "@supabase/supabase-js";
 import { PropsWithChildren, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { supabase, supabaseConfigured } from "../lib/supabase/client";
 import { ClerkProvider, useUser, useAuth as useClerkAuth, useSignIn, useSignUp } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 
 export type OpenEdRole = "learner" | "educator" | "opened_team";
@@ -416,6 +417,20 @@ function ClerkAppProviders({ children }: PropsWithChildren) {
   );
 }
 
+function ClerkProviderWrapper({ children }: PropsWithChildren) {
+  const navigate = useNavigate();
+  const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+  return (
+    <ClerkProvider 
+      publishableKey={publishableKey} 
+      routerPush={(to: string) => navigate(to)}
+      routerReplace={(to: string) => navigate(to, { replace: true })}
+    >
+      {children}
+    </ClerkProvider>
+  );
+}
+
 export function AppProviders({ children }: PropsWithChildren) {
   const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -424,9 +439,9 @@ export function AppProviders({ children }: PropsWithChildren) {
   }
 
   return (
-    <ClerkProvider publishableKey={publishableKey}>
+    <ClerkProviderWrapper>
       <ClerkAppProviders>{children}</ClerkAppProviders>
-    </ClerkProvider>
+    </ClerkProviderWrapper>
   );
 }
 

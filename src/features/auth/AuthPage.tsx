@@ -29,9 +29,9 @@ export function AuthPage({ mode }: AuthPageProps) {
     return (
       <section className="flex min-h-[calc(100vh-64px)] items-center justify-center p-4 bg-background">
         {mode === "login" ? (
-          <SignIn routing="path" path="/login" signUpUrl="/signup" />
+          <SignIn routing="hash" />
         ) : (
-          <SignUp routing="path" path="/signup" signInUrl="/login" />
+          <SignUp routing="hash" />
         )}
       </section>
     );
