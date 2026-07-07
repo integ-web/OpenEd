@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet, useLocation } from "react-router-dom";
 import { AppShell } from "./AppShell";
-import { useAuth, type OpenEdRole } from "./providers";
+import { AppProviders, useAuth, type OpenEdRole } from "./providers";
 import { AuthPage } from "../features/auth/AuthPage";
 import { AuthCallbackPage } from "../features/auth/AuthCallbackPage";
 import { ForgotPasswordPage } from "../features/auth/ForgotPasswordPage";
@@ -94,94 +94,99 @@ function FullScreenWrapper({ Screen }: { Screen: React.FC<any> }) {
 
 export const router = createBrowserRouter([
   {
-    element: <ProtectedRoute />,
+    element: <AppProviders><Outlet /></AppProviders>,
     children: [
-      {
-        path: "/learn/courses/fme",
-        element: <RoleRoute allowed={["learner", "educator", "opened_team"]} />,
-        children: [
-          {
-            path: "",
-            element: (
-              <CourseProvider>
-                <Outlet />
-              </CourseProvider>
-            ),
-            children: [
-              { index: true, element: <FullScreenWrapper Screen={LandingScreen} /> },
-          { path: "onboarding", element: <FullScreenWrapper Screen={OnboardingScreen} /> },
-          { path: "diagnostic", element: <FullScreenWrapper Screen={DiagnosticScreen} /> },
-          { path: "certificate", element: <FullScreenWrapper Screen={CertificateScreen} /> },
-          {
-            element: <CourseLayout />,
-            children: [
-              { path: "course/dashboard", element: <WithProps Screen={DashboardScreen} /> },
-              { path: "course/map", element: <WithProps Screen={LearningMapScreen} /> },
-              { path: "course/modules", element: <WithProps Screen={ModuleIndexScreen} /> },
-              { path: "course/module", element: <WithProps Screen={ModuleDetailScreen} /> },
-              { path: "course/lesson", element: <WithProps Screen={LessonScreen} /> },
-              { path: "course/case-study", element: <WithProps Screen={CaseStudyScreen} /> },
-              { path: "course/simulation", element: <WithProps Screen={SimulationScreen} /> },
-              { path: "course/quiz", element: <WithProps Screen={QuizScreen} /> },
-              { path: "course/evidence", element: <WithProps Screen={EvidenceLibraryScreen} /> },
-              { path: "course/benchmark", element: <WithProps Screen={BenchmarkBuilderScreen} /> },
-              { path: "course/risk", element: <WithProps Screen={RiskDashboardScreen} /> },
-              { path: "course/portfolio", element: <WithProps Screen={PortfolioScreen} /> },
-              { path: "course/glossary", element: <WithProps Screen={GlossaryScreen} /> },
-              { path: "course/sources", element: <WithProps Screen={SourcesScreen} /> },
-              { path: "course/content-qa", element: <WithProps Screen={ContentQAScreen} /> },
-            ]
-          }
-        ],
-      },
-    ],
-  },
-    ],
-  },
-  {
-    element: <AppShell />,
-    children: [
-      { path: "/", element: <LandingPage /> },
-      { path: "/courses", element: <CoursesPage /> },
-      { path: "/courses/fme", element: <FmePublicPage /> },
-      { path: "/login", element: <AuthPage mode="login" /> },
-      { path: "/signup", element: <AuthPage mode="signup" /> },
-      { path: "/forgot-password", element: <ForgotPasswordPage /> },
-      { path: "/reset-password", element: <ResetPasswordPage /> },
-      { path: "/auth/callback", element: <AuthCallbackPage /> },
       {
         element: <ProtectedRoute />,
         children: [
           {
+            path: "/learn/courses/fme",
             element: <RoleRoute allowed={["learner", "educator", "opened_team"]} />,
             children: [
-              { path: "/learn", element: <LearnerDashboardPage /> },
-              { path: "/learn/portfolio", element: <PortfolioPage /> },
-              { path: "/settings/byok", element: <ByokSettingsPage /> },
-              { path: "/capstone", element: <CapstoneProvider><CapstoneStudio /></CapstoneProvider> },
-              { path: "/capstone/:section", element: <CapstoneProvider><CapstoneStudio /></CapstoneProvider> },
-            ],
-          },
-          {
-            element: <RoleRoute allowed={["educator", "opened_team"]} />,
-            children: [
-              { path: "/educator", element: <EducatorDashboardPage /> },
-              { path: "/educator/proof-review", element: <ProofReviewPage /> },
-              { path: "/educator/courses/new", element: <CourseCreationPage /> },
-              { path: "/educator/courses/:courseId/edit", element: <EducatorCourseEditorPage /> },
-              { path: "/educator/courses/:courseId/review-status", element: <EducatorReviewStatusPage /> },
-            ],
-          },
-          {
-            element: <RoleRoute allowed={["opened_team"]} />,
-            children: [
-              { path: "/team", element: <TeamDashboardPage /> },
-              { path: "/team/review-queue", element: <TeamReviewQueuePage /> },
+              {
+                path: "",
+                element: (
+                  <CourseProvider>
+                    <Outlet />
+                  </CourseProvider>
+                ),
+                children: [
+                  { index: true, element: <FullScreenWrapper Screen={LandingScreen} /> },
+                  { path: "onboarding", element: <FullScreenWrapper Screen={OnboardingScreen} /> },
+                  { path: "diagnostic", element: <FullScreenWrapper Screen={DiagnosticScreen} /> },
+                  { path: "certificate", element: <FullScreenWrapper Screen={CertificateScreen} /> },
+                  {
+                    element: <CourseLayout />,
+                    children: [
+                      { path: "course/dashboard", element: <WithProps Screen={DashboardScreen} /> },
+                      { path: "course/map", element: <WithProps Screen={LearningMapScreen} /> },
+                      { path: "course/modules", element: <WithProps Screen={ModuleIndexScreen} /> },
+                      { path: "course/module", element: <WithProps Screen={ModuleDetailScreen} /> },
+                      { path: "course/lesson", element: <WithProps Screen={LessonScreen} /> },
+                      { path: "course/case-study", element: <WithProps Screen={CaseStudyScreen} /> },
+                      { path: "course/simulation", element: <WithProps Screen={SimulationScreen} /> },
+                      { path: "course/quiz", element: <WithProps Screen={QuizScreen} /> },
+                      { path: "course/evidence", element: <WithProps Screen={EvidenceLibraryScreen} /> },
+                      { path: "course/benchmark", element: <WithProps Screen={BenchmarkBuilderScreen} /> },
+                      { path: "course/risk", element: <WithProps Screen={RiskDashboardScreen} /> },
+                      { path: "course/portfolio", element: <WithProps Screen={PortfolioScreen} /> },
+                      { path: "course/glossary", element: <WithProps Screen={GlossaryScreen} /> },
+                      { path: "course/sources", element: <WithProps Screen={SourcesScreen} /> },
+                      { path: "course/content-qa", element: <WithProps Screen={ContentQAScreen} /> },
+                    ]
+                  }
+                ],
+              },
             ],
           },
         ],
       },
-      { path: "*", element: <NotFoundPage /> },
-    ],
-  },
+      {
+        element: <AppShell />,
+        children: [
+          { path: "/", element: <LandingPage /> },
+          { path: "/courses", element: <CoursesPage /> },
+          { path: "/courses/fme", element: <FmePublicPage /> },
+          { path: "/login", element: <AuthPage mode="login" /> },
+          { path: "/signup", element: <AuthPage mode="signup" /> },
+          { path: "/forgot-password", element: <ForgotPasswordPage /> },
+          { path: "/reset-password", element: <ResetPasswordPage /> },
+          { path: "/auth/callback", element: <AuthCallbackPage /> },
+          {
+            element: <ProtectedRoute />,
+            children: [
+              {
+                element: <RoleRoute allowed={["learner", "educator", "opened_team"]} />,
+                children: [
+                  { path: "/learn", element: <LearnerDashboardPage /> },
+                  { path: "/learn/portfolio", element: <PortfolioPage /> },
+                  { path: "/settings/byok", element: <ByokSettingsPage /> },
+                  { path: "/capstone", element: <CapstoneProvider><CapstoneStudio /></CapstoneProvider> },
+                  { path: "/capstone/:section", element: <CapstoneProvider><CapstoneStudio /></CapstoneProvider> },
+                ],
+              },
+              {
+                element: <RoleRoute allowed={["educator", "opened_team"]} />,
+                children: [
+                  { path: "/educator", element: <EducatorDashboardPage /> },
+                  { path: "/educator/proof-review", element: <ProofReviewPage /> },
+                  { path: "/educator/courses/new", element: <CourseCreationPage /> },
+                  { path: "/educator/courses/:courseId/edit", element: <EducatorCourseEditorPage /> },
+                  { path: "/educator/courses/:courseId/review-status", element: <EducatorReviewStatusPage /> },
+                ],
+              },
+              {
+                element: <RoleRoute allowed={["opened_team"]} />,
+                children: [
+                  { path: "/team", element: <TeamDashboardPage /> },
+                  { path: "/team/review-queue", element: <TeamReviewQueuePage /> },
+                ],
+              },
+            ],
+          },
+          { path: "*", element: <NotFoundPage /> },
+        ],
+      },
+    ]
+  }
 ], { basename: import.meta.env.BASE_URL });

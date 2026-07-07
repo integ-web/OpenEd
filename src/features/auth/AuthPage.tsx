@@ -6,6 +6,7 @@ import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
+import { SignIn, SignUp } from "@clerk/clerk-react";
 
 type AuthPageProps = {
   mode: "login" | "signup";
@@ -18,8 +19,22 @@ export function AuthPage({ mode }: AuthPageProps) {
   const [error, setError] = useState("");
   const from = sanitizeRedirectTarget((location.state as { from?: { pathname?: string } } | null)?.from?.pathname);
 
+  const isClerkActive = !!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
   if (isAuthenticated) {
     return <Navigate to={from} replace />;
+  }
+
+  if (isClerkActive) {
+    return (
+      <section className="flex min-h-[calc(100vh-64px)] items-center justify-center p-4 bg-background">
+        {mode === "login" ? (
+          <SignIn routing="hash" />
+        ) : (
+          <SignUp routing="hash" />
+        )}
+      </section>
+    );
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {

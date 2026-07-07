@@ -1,6 +1,9 @@
 import type { Session, User } from "@supabase/supabase-js";
 import { PropsWithChildren, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { supabase, supabaseConfigured } from "../lib/supabase/client";
+import { ClerkProvider, useUser, useAuth as useClerkAuth, useSignIn, useSignUp } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
+
 
 export type OpenEdRole = "learner" | "educator" | "opened_team";
 
@@ -79,7 +82,7 @@ function writeMockProfile(profile: OpenEdProfile) {
 
 import { CapstoneProvider } from "../features/capstone/CapstoneContext";
 
-export function AppProviders({ children }: PropsWithChildren) {
+function LegacyAppProviders({ children }: PropsWithChildren) {
   const isMockAuth = !supabaseConfigured;
   const canUseDevRoleSwitcher = import.meta.env.DEV && import.meta.env.VITE_ENABLE_DEV_ROLE_SWITCHER === "true";
   const [session, setSession] = useState<Session | null>(null);
@@ -308,6 +311,137 @@ export function AppProviders({ children }: PropsWithChildren) {
         {children}
       </CapstoneProvider>
     </AuthContext.Provider>
+  );
+}
+
+function ClerkAppProviders({ children }: PropsWithChildren) {
+  const { user: clerkUser, isLoaded: userLoaded } = useUser();
+  const { signOut: clerkSignOut } = useClerkAuth();
+  const { signIn: clerkSignIn, isLoaded: signInLoaded } = useSignIn();
+  const { signUp: clerkSignUp, isLoaded: signUpLoaded } = useSignUp();
+
+  const loading = !userLoaded || !signInLoaded || !signUpLoaded;
+
+  const role = (clerkUser?.unsafeMetadata?.role as OpenEdRole) || (clerkUser?.publicMetadata?.role as OpenEdRole) || "learner";
+
+  const profile = useMemo<OpenEdProfile | null>(() => {
+    if (!clerkUser) return null;
+    return {
+      id: clerkUser.id,
+      email: clerkUser.primaryEmailAddress?.emailAddress ?? "",
+      full_name: clerkUser.fullName ?? "OpenEd learner",
+      role,
+    };
+  }, [clerkUser, role]);
+
+  const signUp = useCallback(
+    async (email: string, password: string, fullName = "OpenEd learner") => {
+      if (!clerkSignUp) return;
+      const res = await clerkSignUp.create({
+        emailAddress: email,
+        password,
+        firstName: fullName.split(" ")[0],
+        lastName: fullName.split(" ").slice(1).join(" "),
+      });
+      if (res.status === "missing_requirements") {
+        await clerkSignUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      }
+    },
+    [clerkSignUp]
+  );
+
+  const signIn = useCallback(
+    async (email: string, password: string) => {
+      if (!clerkSignIn) return;
+      await clerkSignIn.create({
+        identifier: email,
+        password,
+      });
+    },
+    [clerkSignIn]
+  );
+
+  const signOut = useCallback(async () => {
+    await clerkSignOut();
+  }, [clerkSignOut]);
+
+  const setRole = useCallback(
+    async (newRole: OpenEdRole) => {
+      if (!clerkUser) return;
+      await clerkUser.update({
+        unsafeMetadata: {
+          role: newRole,
+        },
+      });
+    },
+    [clerkUser]
+  );
+
+  const mappedUser = useMemo(() => {
+    if (!clerkUser) return null;
+    return {
+      id: clerkUser.id,
+      email: clerkUser.primaryEmailAddress?.emailAddress ?? "",
+      user_metadata: {
+        full_name: clerkUser.fullName ?? "OpenEd learner",
+      },
+    } as any;
+  }, [clerkUser]);
+
+  const value = useMemo<AuthContextValue>(
+    () => ({
+      user: mappedUser,
+      session: null,
+      profile,
+      role,
+      loading,
+      isAuthenticated: Boolean(clerkUser),
+      isMockAuth: false,
+      canUseDevRoleSwitcher: import.meta.env.DEV && import.meta.env.VITE_ENABLE_DEV_ROLE_SWITCHER === "true",
+      signUp,
+      signIn,
+      signOut,
+      resetPassword: async () => {},
+      updatePassword: async () => {},
+      setRole,
+    }),
+    [clerkUser, mappedUser, profile, role, loading, signUp, signIn, signOut, setRole]
+  );
+
+  return (
+    <AuthContext.Provider value={value}>
+      <CapstoneProvider>
+        {children}
+      </CapstoneProvider>
+    </AuthContext.Provider>
+  );
+}
+
+function ClerkProviderWrapper({ children }: PropsWithChildren) {
+  const navigate = useNavigate();
+  const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+  return (
+    <ClerkProvider 
+      publishableKey={publishableKey} 
+      routerPush={(to: string) => navigate(to)}
+      routerReplace={(to: string) => navigate(to, { replace: true })}
+    >
+      {children}
+    </ClerkProvider>
+  );
+}
+
+export function AppProviders({ children }: PropsWithChildren) {
+  const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    return <LegacyAppProviders>{children}</LegacyAppProviders>;
+  }
+
+  return (
+    <ClerkProviderWrapper>
+      <ClerkAppProviders>{children}</ClerkAppProviders>
+    </ClerkProviderWrapper>
   );
 }
 
